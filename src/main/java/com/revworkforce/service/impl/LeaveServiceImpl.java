@@ -1,5 +1,6 @@
 package com.revworkforce.service.impl;
 
+import com.revworkforce.exception.BusinessException;
 import com.revworkforce.entity.*;
 import com.revworkforce.enums.LeaveStatus;
 import com.revworkforce.exception.ResourceNotFoundException;
@@ -54,6 +55,10 @@ public class LeaveServiceImpl implements LeaveService {
 
         long numberOfDays = ChronoUnit.DAYS.between(startDate, endDate) + 1;
 
+        if (endDate.isBefore(startDate)) {
+            throw new BusinessException("End date cannot be before start date");
+        }
+
         if (leaveBalance.getRemainingLeaves() < numberOfDays) {
             throw new ResourceNotFoundException("Insufficient leave balance");
         }
@@ -74,6 +79,10 @@ public class LeaveServiceImpl implements LeaveService {
 
         LeaveApplication leaveApplication = leaveApplicationRepository.findById(leaveApplicationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Leave application not found"));
+
+        if (leaveApplication.getStatus() != LeaveStatus.PENDING) {
+            throw new BusinessException("Only pending leaves can be approved");
+        }
 
         leaveApplication.setStatus(LeaveStatus.APPROVED);
         leaveApplication.setManagerComments(managerComment);
@@ -103,6 +112,10 @@ public class LeaveServiceImpl implements LeaveService {
         LeaveApplication leaveApplication = leaveApplicationRepository.findById(leaveApplicationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Leave application not found"));
 
+        if (leaveApplication.getStatus() != LeaveStatus.PENDING) {
+            throw new BusinessException("Only pending leaves can be rejected");
+        }
+
         leaveApplication.setStatus(LeaveStatus.REJECTED);
         leaveApplication.setManagerComments(managerComment);
 
@@ -114,6 +127,10 @@ public class LeaveServiceImpl implements LeaveService {
 
         LeaveApplication leaveApplication = leaveApplicationRepository.findById(leaveApplicationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Leave application not found"));
+
+        if (leaveApplication.getStatus() != LeaveStatus.PENDING) {
+            throw new BusinessException("Only pending leaves can be cancelled");
+        }
 
         leaveApplication.setStatus(LeaveStatus.CANCELLED);
 
