@@ -16,4 +16,11 @@ public class Department extends BaseEntity {
     private String description;
 
     // getters & setters
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
