@@ -1,0 +1,46 @@
+package com.revworkforce.controller;
+
+import com.revworkforce.entity.User;
+import com.revworkforce.service.UserManagementService;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+import com.revworkforce.dto.CreateUserRequest;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/admin/users")
+@PreAuthorize("hasRole('ADMIN')")
+public class UserManagementController {
+
+    private final UserManagementService userManagementService;
+
+    public UserManagementController(UserManagementService userManagementService) {
+        this.userManagementService = userManagementService;
+    }
+
+    // ✅ Create User
+    @PostMapping
+    public User createUser(@RequestBody CreateUserRequest request) {
+        return userManagementService.createUser(request.getUser(), request.getRoleName());
+    }
+
+    // ✅ Get All Users
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userManagementService.getAllUsers();
+    }
+
+    // ✅ Activate / Deactivate User
+    @PutMapping("/{id}/status")
+    public User updateUserStatus(@PathVariable Long id,
+                                 @RequestParam boolean active) {
+        return userManagementService.updateUserStatus(id, active);
+    }
+
+    // ✅ Delete User
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable Long id) {
+        userManagementService.deleteUser(id);
+    }
+}
