@@ -2,6 +2,7 @@ package com.revworkforce.service.impl;
 
 import com.revworkforce.entity.*;
 import com.revworkforce.enums.LeaveStatus;
+import com.revworkforce.exception.ResourceNotFoundException;
 import com.revworkforce.repository.*;
 import com.revworkforce.service.LeaveService;
 import org.springframework.stereotype.Service;
@@ -42,19 +43,19 @@ public class LeaveServiceImpl implements LeaveService {
     ) {
 
         Employee employee = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
 
         LeaveType leaveType = leaveTypeRepository.findById(leaveTypeId)
-                .orElseThrow(() -> new RuntimeException("Leave type not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Leave type not found"));
 
         LeaveBalance leaveBalance = leaveBalanceRepository
                 .findByEmployeeAndLeaveType(employee, leaveType)
-                .orElseThrow(() -> new RuntimeException("Leave balance not configured"));
+                .orElseThrow(() -> new ResourceNotFoundException("Leave balance not configured"));
 
         long numberOfDays = ChronoUnit.DAYS.between(startDate, endDate) + 1;
 
         if (leaveBalance.getRemainingLeaves() < numberOfDays) {
-            throw new RuntimeException("Insufficient leave balance");
+            throw new ResourceNotFoundException("Insufficient leave balance");
         }
 
         LeaveApplication leaveApplication = new LeaveApplication();
@@ -72,7 +73,7 @@ public class LeaveServiceImpl implements LeaveService {
     public LeaveApplication approveLeave(Long leaveApplicationId, String managerComment) {
 
         LeaveApplication leaveApplication = leaveApplicationRepository.findById(leaveApplicationId)
-                .orElseThrow(() -> new RuntimeException("Leave application not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Leave application not found"));
 
         leaveApplication.setStatus(LeaveStatus.APPROVED);
         leaveApplication.setManagerComments(managerComment);
@@ -81,7 +82,7 @@ public class LeaveServiceImpl implements LeaveService {
                 .findByEmployeeAndLeaveType(
                         leaveApplication.getEmployee(),
                         leaveApplication.getLeaveType()
-                ).orElseThrow(() -> new RuntimeException("Leave balance not found"));
+                ).orElseThrow(() -> new ResourceNotFoundException("Leave balance not found"));
 
         long days = ChronoUnit.DAYS.between(
                 leaveApplication.getStartDate(),
@@ -100,7 +101,7 @@ public class LeaveServiceImpl implements LeaveService {
     public LeaveApplication rejectLeave(Long leaveApplicationId, String managerComment) {
 
         LeaveApplication leaveApplication = leaveApplicationRepository.findById(leaveApplicationId)
-                .orElseThrow(() -> new RuntimeException("Leave application not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Leave application not found"));
 
         leaveApplication.setStatus(LeaveStatus.REJECTED);
         leaveApplication.setManagerComments(managerComment);
@@ -112,7 +113,7 @@ public class LeaveServiceImpl implements LeaveService {
     public LeaveApplication cancelLeave(Long leaveApplicationId) {
 
         LeaveApplication leaveApplication = leaveApplicationRepository.findById(leaveApplicationId)
-                .orElseThrow(() -> new RuntimeException("Leave application not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Leave application not found"));
 
         leaveApplication.setStatus(LeaveStatus.CANCELLED);
 
@@ -123,7 +124,7 @@ public class LeaveServiceImpl implements LeaveService {
     public List<LeaveApplication> getEmployeeLeaves(Long employeeId) {
 
         Employee employee = employeeRepository.findById(employeeId)
-                .orElseThrow(() -> new RuntimeException("Employee not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
 
         return leaveApplicationRepository.findByEmployee(employee);
     }
