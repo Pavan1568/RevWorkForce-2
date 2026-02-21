@@ -16,4 +16,11 @@ public class LeaveType extends BaseEntity {
     private String description;
 
     // getters & setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

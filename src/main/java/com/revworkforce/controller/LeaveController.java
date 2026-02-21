@@ -3,6 +3,9 @@ package com.revworkforce.controller;
 import com.revworkforce.entity.LeaveApplication;
 import com.revworkforce.service.LeaveService;
 import org.springframework.web.bind.annotation.*;
+import com.revworkforce.dto.ApplyLeaveRequestDTO;
+import com.revworkforce.dto.LeaveResponseDTO;
+import jakarta.validation.Valid;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,20 +22,29 @@ public class LeaveController {
 
     // 1️⃣ Apply Leave
     @PostMapping("/apply")
-    public LeaveApplication applyLeave(
-            @RequestParam Long employeeId,
-            @RequestParam Long leaveTypeId,
-            @RequestParam String startDate,
-            @RequestParam String endDate,
-            @RequestParam String reason
+    public LeaveResponseDTO applyLeave(
+            @Valid @RequestBody ApplyLeaveRequestDTO request
     ) {
-        return leaveService.applyLeave(
-                employeeId,
-                leaveTypeId,
-                LocalDate.parse(startDate),
-                LocalDate.parse(endDate),
-                reason
+
+        LeaveApplication leaveApplication = leaveService.applyLeave(
+                request.getEmployeeId(),
+                request.getLeaveTypeId(),
+                request.getStartDate(),
+                request.getEndDate(),
+                request.getReason()
         );
+
+        LeaveResponseDTO response = new LeaveResponseDTO();
+        response.setId(leaveApplication.getId());
+        response.setEmployeeId(leaveApplication.getEmployee().getId());
+        response.setLeaveTypeId(leaveApplication.getLeaveType().getId());
+        response.setStartDate(leaveApplication.getStartDate());
+        response.setEndDate(leaveApplication.getEndDate());
+        response.setReason(leaveApplication.getReason());
+        response.setStatus(leaveApplication.getStatus().name());
+        response.setManagerComments(leaveApplication.getManagerComments());
+
+        return response;
     }
 
     // 2️⃣ Approve Leave
