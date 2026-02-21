@@ -8,6 +8,8 @@ import com.revworkforce.repository.*;
 import com.revworkforce.service.LeaveService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.Arrays;
+
 
 import java.time.temporal.ChronoUnit;
 import java.time.LocalDate;
@@ -61,6 +63,19 @@ public class LeaveServiceImpl implements LeaveService {
 
         if (leaveBalance.getRemainingLeaves() < numberOfDays) {
             throw new ResourceNotFoundException("Insufficient leave balance");
+        }
+
+        List<LeaveApplication> overlappingLeaves =
+                leaveApplicationRepository
+                        .findByEmployeeIdAndStatusInAndStartDateLessThanEqualAndEndDateGreaterThanEqual(
+                                employeeId,
+                                Arrays.asList(LeaveStatus.PENDING, LeaveStatus.APPROVED),
+                                endDate,
+                                startDate
+                        );
+
+        if (!overlappingLeaves.isEmpty()) {
+            throw new BusinessException("Leave request overlaps with existing leave");
         }
 
         LeaveApplication leaveApplication = new LeaveApplication();
