@@ -26,4 +26,44 @@ public class LeaveBalance extends BaseEntity {
     private Integer remainingLeaves;
 
     // getters & setters
+
+    public Integer getRemainingLeaves() {
+        return remainingLeaves;
+    }
+
+    public void setRemainingLeaves(Integer remainingLeaves) {
+        this.remainingLeaves = remainingLeaves;
+    }
+
+    public Integer getUsedLeaves() {
+        return usedLeaves;
+    }
+
+    public void setUsedLeaves(Integer usedLeaves) {
+        this.usedLeaves = usedLeaves;
+    }
+
+    public Integer getTotalAllocated() {
+        return totalAllocated;
+    }
+
+    public void setTotalAllocated(Integer totalAllocated) {
+        this.totalAllocated = totalAllocated;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public LeaveType getLeaveType() {
+        return leaveType;
+    }
+
+    public void setLeaveType(LeaveType leaveType) {
+        this.leaveType = leaveType;
+    }
 }
