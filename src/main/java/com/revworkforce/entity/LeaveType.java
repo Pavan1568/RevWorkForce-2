@@ -15,6 +15,8 @@ public class LeaveType extends BaseEntity {
 
     private String description;
 
+    private Integer totalDays;
+
     // getters & setters
     public Long getId() {
         return id;
@@ -22,5 +24,21 @@ public class LeaveType extends BaseEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getTotalDays() {
+        return totalDays;
+    }
+
+    public void setTotalDays(Integer totalDays) {
+        this.totalDays = totalDays;
     }
 }
