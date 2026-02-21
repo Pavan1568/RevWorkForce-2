@@ -1,14 +1,14 @@
 package com.revworkforce.controller;
-
-import com.revworkforce.entity.LeaveApplication;
-import com.revworkforce.service.LeaveService;
-import org.springframework.web.bind.annotation.*;
 import com.revworkforce.dto.ApplyLeaveRequestDTO;
 import com.revworkforce.dto.LeaveResponseDTO;
-import jakarta.validation.Valid;
+import com.revworkforce.entity.LeaveApplication;
+import com.revworkforce.service.LeaveService;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import jakarta.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/leaves")
@@ -20,11 +20,12 @@ public class LeaveController {
         this.leaveService = leaveService;
     }
 
-    // 1️⃣ Apply Leave
+    // ==============================
+    // EMPLOYEE: Apply Leave
+    // ==============================
+    @PreAuthorize("hasRole('EMPLOYEE')")
     @PostMapping("/apply")
-    public LeaveResponseDTO applyLeave(
-            @Valid @RequestBody ApplyLeaveRequestDTO request
-    ) {
+    public LeaveResponseDTO applyLeave(@Valid @RequestBody ApplyLeaveRequestDTO request) {
 
         LeaveApplication leaveApplication = leaveService.applyLeave(
                 request.getEmployeeId(),
@@ -34,7 +35,92 @@ public class LeaveController {
                 request.getReason()
         );
 
+        return mapToResponseDTO(leaveApplication);
+    }
+
+    // ==============================
+    // EMPLOYEE: Cancel Leave
+    // ==============================
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @PutMapping("/{id}/cancel")
+    public LeaveResponseDTO cancelLeave(@PathVariable Long id) {
+
+        LeaveApplication leaveApplication = leaveService.cancelLeave(id);
+        return mapToResponseDTO(leaveApplication);
+    }
+
+    // ==============================
+    // MANAGER / ADMIN: Approve Leave
+    // ==============================
+    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
+    @PutMapping("/{id}/approve")
+    public LeaveResponseDTO approveLeave(
+            @PathVariable Long id,
+            @RequestParam String comment) {
+
+        LeaveApplication leaveApplication = leaveService.approveLeave(id, comment);
+        return mapToResponseDTO(leaveApplication);
+    }
+
+    // ==============================
+    // MANAGER / ADMIN: Reject Leave
+    // ==============================
+    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
+    @PutMapping("/{id}/reject")
+    public LeaveResponseDTO rejectLeave(
+            @PathVariable Long id,
+            @RequestParam String comment) {
+
+        LeaveApplication leaveApplication = leaveService.rejectLeave(id, comment);
+        return mapToResponseDTO(leaveApplication);
+    }
+
+    // ==============================
+    // EMPLOYEE: View Own Leaves
+    // ==============================
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @GetMapping("/employee/{employeeId}")
+    public List<LeaveResponseDTO> getEmployeeLeaves(@PathVariable Long employeeId) {
+
+        return leaveService.getEmployeeLeaves(employeeId)
+                .stream()
+                .map(this::mapToResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    // ==============================
+    // MANAGER: View Team Leaves
+    // ==============================
+    @PreAuthorize("hasRole('MANAGER')")
+    @GetMapping("/manager/{managerId}")
+    public List<LeaveResponseDTO> getTeamLeaves(@PathVariable Long managerId) {
+
+        return leaveService.getManagerTeamLeaves(managerId)
+                .stream()
+                .map(this::mapToResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    // ==============================
+    // ADMIN: View All Leaves
+    // ==============================
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/all")
+    public List<LeaveResponseDTO> getAllLeaves() {
+
+        return leaveService.getAllLeaves()
+                .stream()
+                .map(this::mapToResponseDTO)
+                .collect(Collectors.toList());
+    }
+
+    // ==============================
+    // Private DTO Mapper
+    // ==============================
+    private LeaveResponseDTO mapToResponseDTO(LeaveApplication leaveApplication) {
+
         LeaveResponseDTO response = new LeaveResponseDTO();
+
         response.setId(leaveApplication.getId());
         response.setEmployeeId(leaveApplication.getEmployee().getId());
         response.setLeaveTypeId(leaveApplication.getLeaveType().getId());
@@ -45,41 +131,5 @@ public class LeaveController {
         response.setManagerComments(leaveApplication.getManagerComments());
 
         return response;
-    }
-
-    // 2️⃣ Approve Leave
-    @PutMapping("/{id}/approve")
-    public LeaveApplication approveLeave(
-            @PathVariable Long id,
-            @RequestParam String comment
-    ) {
-        return leaveService.approveLeave(id, comment);
-    }
-
-    // 3️⃣ Reject Leave
-    @PutMapping("/{id}/reject")
-    public LeaveApplication rejectLeave(
-            @PathVariable Long id,
-            @RequestParam String comment
-    ) {
-        return leaveService.rejectLeave(id, comment);
-    }
-
-    // 4️⃣ Cancel Leave
-    @PutMapping("/{id}/cancel")
-    public LeaveApplication cancelLeave(@PathVariable Long id) {
-        return leaveService.cancelLeave(id);
-    }
-
-    // 5️⃣ View Employee Leaves
-    @GetMapping("/employee/{employeeId}")
-    public List<LeaveApplication> getEmployeeLeaves(@PathVariable Long employeeId) {
-        return leaveService.getEmployeeLeaves(employeeId);
-    }
-
-    // 6️⃣ View Manager Team Leaves
-    @GetMapping("/manager/{managerId}")
-    public List<LeaveApplication> getManagerTeamLeaves(@PathVariable Long managerId) {
-        return leaveService.getManagerTeamLeaves(managerId);
     }
 }

@@ -29,7 +29,7 @@ public class LeaveApplication extends BaseEntity {
     private String reason;
 
     @Enumerated(EnumType.STRING)
-    private LeaveStatus status = LeaveStatus.PENDING;
+    private LeaveStatus status;
 
     private String managerComments;
 

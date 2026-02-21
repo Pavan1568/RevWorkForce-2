@@ -1,24 +1,24 @@
 package com.revworkforce.repository;
 
 import com.revworkforce.entity.LeaveApplication;
-import com.revworkforce.entity.Employee;
-import com.revworkforce.enums.LeaveStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
+
 import java.time.LocalDate;
 import java.util.List;
 
-public interface LeaveApplicationRepository extends JpaRepository<LeaveApplication, Long> {
+public interface LeaveApplicationRepository
+        extends JpaRepository<LeaveApplication, Long> {
 
-    List<LeaveApplication> findByEmployee(Employee employee);
-
-    List<LeaveApplication> findByEmployee_Manager_Id(Long managerId);
-
-    List<LeaveApplication> findByStatus(LeaveStatus status);
-
-    List<LeaveApplication> findByEmployeeIdAndStatusInAndStartDateLessThanEqualAndEndDateGreaterThanEqual(
+    // Check overlapping leave
+    boolean existsByEmployee_IdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(
             Long employeeId,
-            List<LeaveStatus> statuses,
             LocalDate endDate,
             LocalDate startDate
     );
+
+    // Get leaves of an employee
+    List<LeaveApplication> findByEmployee_Id(Long employeeId);
+
+    // Get team leaves for manager
+    List<LeaveApplication> findByEmployee_Manager_Id(Long managerId);
 }

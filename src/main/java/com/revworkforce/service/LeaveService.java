@@ -24,4 +24,6 @@ public interface LeaveService {
     List<LeaveApplication> getEmployeeLeaves(Long employeeId);
 
     List<LeaveApplication> getManagerTeamLeaves(Long managerId);
+
+    List<LeaveApplication> getAllLeaves();
 }

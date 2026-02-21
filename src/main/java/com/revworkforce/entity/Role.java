@@ -16,4 +16,11 @@ public class Role extends BaseEntity {
     private RoleType name;
 
     // getters & setters
+    public RoleType getName() {
+        return name;
+    }
+
+    public void setName(RoleType name) {
+        this.name = name;
+    }
 }
