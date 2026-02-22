@@ -103,4 +103,12 @@ public class Employee extends BaseEntity {
     public void setDepartment(Department department) {
         this.department = department;
     }
+
+    public Designation getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(Designation designation) {
+        this.designation = designation;
+    }
 }

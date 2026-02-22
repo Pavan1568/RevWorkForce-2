@@ -15,5 +15,18 @@ public class Designation extends BaseEntity {
 
     private String description;
 
+    private String name;
+
     // getters & setters
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
