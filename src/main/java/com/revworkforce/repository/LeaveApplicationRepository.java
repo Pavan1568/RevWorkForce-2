@@ -21,4 +21,5 @@ public interface LeaveApplicationRepository
 
     // Get team leaves for manager
     List<LeaveApplication> findByEmployee_Manager_Id(Long managerId);
+
 }

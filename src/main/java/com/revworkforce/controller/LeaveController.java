@@ -2,6 +2,7 @@ package com.revworkforce.controller;
 import com.revworkforce.dto.ApplyLeaveRequestDTO;
 import com.revworkforce.dto.LeaveResponseDTO;
 import com.revworkforce.entity.LeaveApplication;
+import com.revworkforce.entity.LeaveBalance;
 import com.revworkforce.service.LeaveService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -112,6 +113,18 @@ public class LeaveController {
                 .stream()
                 .map(this::mapToResponseDTO)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/manager/{managerId}/calendar")
+    @PreAuthorize("hasRole('MANAGER')")
+    public List<LeaveApplication> getTeamLeaveCalendar(@PathVariable Long managerId) {
+        return leaveService.getTeamLeaveCalendar(managerId);
+    }
+
+    @GetMapping("/manager/employee/{employeeId}/balance")
+    @PreAuthorize("hasRole('MANAGER')")
+    public List<LeaveBalance> getEmployeeLeaveBalance(@PathVariable Long employeeId) {
+        return leaveService.getEmployeeLeaveBalance(employeeId);
     }
 
     // ==============================

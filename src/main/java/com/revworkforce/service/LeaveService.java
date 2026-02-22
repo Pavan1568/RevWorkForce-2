@@ -1,7 +1,8 @@
 package com.revworkforce.service;
 
 import com.revworkforce.entity.LeaveApplication;
-
+import com.revworkforce.entity.LeaveBalance;
+import java.util.List;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -26,4 +27,8 @@ public interface LeaveService {
     List<LeaveApplication> getManagerTeamLeaves(Long managerId);
 
     List<LeaveApplication> getAllLeaves();
+
+    List<LeaveApplication> getTeamLeaveCalendar(Long managerId);
+
+    List<LeaveBalance> getEmployeeLeaveBalance(Long employeeId);
 }

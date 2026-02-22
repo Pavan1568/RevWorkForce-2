@@ -1,5 +1,5 @@
 package com.revworkforce.repository;
-
+import java.util.List;
 import com.revworkforce.entity.LeaveBalance;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -12,4 +12,6 @@ public interface LeaveBalanceRepository
             Long employeeId,
             Long leaveTypeId
     );
+
+    List<LeaveBalance> findByEmployeeId(Long employeeId);
 }

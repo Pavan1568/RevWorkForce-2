@@ -1,5 +1,6 @@
 package com.revworkforce.service.impl;
-
+import com.revworkforce.entity.LeaveBalance;
+import java.util.List;
 import com.revworkforce.entity.*;
 import com.revworkforce.enums.LeaveStatus;
 import com.revworkforce.repository.*;
@@ -147,5 +148,15 @@ public class LeaveServiceImpl implements LeaveService {
     @Override
     public List<LeaveApplication> getAllLeaves() {
         return leaveApplicationRepository.findAll();
+    }
+
+    @Override
+    public List<LeaveApplication> getTeamLeaveCalendar(Long managerId) {
+        return leaveApplicationRepository.findByEmployee_Manager_Id(managerId);
+    }
+
+    @Override
+    public List<LeaveBalance> getEmployeeLeaveBalance(Long employeeId) {
+        return leaveBalanceRepository.findByEmployeeId(employeeId);
     }
 }
