@@ -28,7 +28,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleGeneric(Exception ex) {
 
-        return buildResponse("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+        ex.printStackTrace(); // 🔥 this will print real error in console
+
+        return buildResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
