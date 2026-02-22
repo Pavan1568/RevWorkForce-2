@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import com.revworkforce.entity.Notification;
+import com.revworkforce.repository.NotificationRepository;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +21,7 @@ public class LeaveServiceImpl implements LeaveService {
     private final EmployeeRepository employeeRepository;
     private final LeaveTypeRepository leaveTypeRepository;
     private final LeaveBalanceRepository leaveBalanceRepository;
+    private final NotificationRepository notificationRepository;
 
     // ================= APPLY LEAVE =================
 
@@ -61,7 +64,25 @@ public class LeaveServiceImpl implements LeaveService {
         leaveApplication.setReason(reason);
         leaveApplication.setStatus(LeaveStatus.PENDING);
 
-        return leaveApplicationRepository.save(leaveApplication);
+        LeaveApplication savedLeave = leaveApplicationRepository.save(leaveApplication);
+
+// 🔔 Create notification for manager
+        Employee manager = employee.getManager();
+
+        if (manager != null) {
+            Notification notification = new Notification();
+            notification.setManager(manager);
+            notification.setMessage(
+                    employee.getFirstName() + " applied for leave from "
+                            + savedLeave.getStartDate() + " to "
+                            + savedLeave.getEndDate()
+            );
+            notification.setReadStatus(false);
+
+            notificationRepository.save(notification);
+        }
+
+        return savedLeave;
     }
 
     // ================= APPROVE LEAVE =================
