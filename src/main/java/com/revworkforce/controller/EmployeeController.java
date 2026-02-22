@@ -21,4 +21,11 @@ public class EmployeeController {
     public ManagerResponseDTO getReportingManager(@PathVariable Long id) {
         return employeeService.getReportingManager(id);
     }
+
+    @PutMapping("/{employeeId}/assign-manager/{managerId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public void assignManager(@PathVariable Long employeeId,
+                              @PathVariable Long managerId) {
+        employeeService.assignManager(employeeId, managerId);
+    }
 }

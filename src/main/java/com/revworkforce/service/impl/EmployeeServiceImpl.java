@@ -58,6 +58,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return getProfile(employeeId);
     }
+    @Override
+    public void assignManager(Long employeeId, Long managerId) {
+
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+
+        Employee manager = employeeRepository.findById(managerId)
+                .orElseThrow(() -> new ResourceNotFoundException("Manager not found"));
+
+        employee.setManager(manager);
+
+        employeeRepository.save(employee);
+    }
 
     @Override
     public ManagerResponseDTO getReportingManager(Long employeeId) {
@@ -78,5 +91,6 @@ public class EmployeeServiceImpl implements EmployeeService {
                 manager.getDepartment().getName(),
                 manager.getDesignation().getName()
         );
+
     }
 }

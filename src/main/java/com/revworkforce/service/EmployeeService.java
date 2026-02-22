@@ -10,4 +10,6 @@ public interface EmployeeService {
     ProfileResponseDTO updateProfile(Long employeeId, UpdateProfileDTO dto);
 
     ManagerResponseDTO getReportingManager(Long employeeId);
+
+    void assignManager(Long employeeId, Long managerId);
 }
