@@ -1,5 +1,4 @@
 package com.revworkforce.service.impl;
-
 import com.revworkforce.dto.ProfileResponseDTO;
 import com.revworkforce.dto.UpdateProfileDTO;
 import com.revworkforce.entity.Employee;
@@ -8,6 +7,7 @@ import com.revworkforce.service.EmployeeService;
 import org.springframework.stereotype.Service;
 import com.revworkforce.dto.ManagerResponseDTO;
 import com.revworkforce.exception.ResourceNotFoundException;
+import java.util.List;
 
 
 @Service
@@ -71,6 +71,25 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         employeeRepository.save(employee);
     }
+
+    // ================= SEARCH METHODS =================
+
+    @Override
+    public List<Employee> searchByName(String name) {
+        return employeeRepository.findByFirstNameContainingIgnoreCase(name);
+    }
+
+    @Override
+    public List<Employee> searchByEmail(String email) {
+        return employeeRepository.findByUser_EmailContainingIgnoreCase(email);
+    }
+
+    @Override
+    public List<Employee> searchByDepartment(String department) {
+        return employeeRepository.findByDepartment_NameContainingIgnoreCase(department);
+    }
+
+
 
     @Override
     public ManagerResponseDTO getReportingManager(Long employeeId) {
