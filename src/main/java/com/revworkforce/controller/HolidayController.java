@@ -38,4 +38,19 @@ public class HolidayController {
     public List<Holiday> getByYear(@PathVariable int year) {
         return holidayService.getHolidaysByYear(year);
     }
+
+    // ✏️ Update holiday
+    @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public Holiday updateHoliday(@PathVariable Long id,
+                                 @RequestBody Holiday holiday) {
+        return holidayService.updateHoliday(id, holiday);
+    }
+
+    // ❌ Delete holiday
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public void deleteHoliday(@PathVariable Long id) {
+        holidayService.deleteHoliday(id);
+    }
 }

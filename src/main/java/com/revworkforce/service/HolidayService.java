@@ -14,4 +14,7 @@ public interface HolidayService {
     List<Holiday> getAllHolidays();
 
     List<Holiday> getHolidaysByYear(int year);
+
+    Holiday updateHoliday(Long id, Holiday holiday);
+
 }

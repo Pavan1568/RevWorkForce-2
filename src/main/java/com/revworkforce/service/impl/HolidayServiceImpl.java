@@ -36,4 +36,17 @@ public class HolidayServiceImpl implements HolidayService {
         LocalDate end = LocalDate.of(year, 12, 31);
         return holidayRepository.findByDateBetween(start, end);
     }
+    @Override
+    public Holiday updateHoliday(Long id, Holiday holiday) {
+
+        Holiday existing = holidayRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Holiday not found"));
+
+        existing.setName(holiday.getName());
+        existing.setDate(holiday.getDate());
+        existing.setDescription(holiday.getDescription());
+
+        return holidayRepository.save(existing);
+    }
+
 }
