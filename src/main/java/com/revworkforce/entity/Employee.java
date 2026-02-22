@@ -37,6 +37,13 @@ public class Employee extends BaseEntity {
     private Employee manager;
 
     // getters & setters
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
 
     public String getName() {
         return firstName + " " + lastName;
@@ -87,5 +94,13 @@ public class Employee extends BaseEntity {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

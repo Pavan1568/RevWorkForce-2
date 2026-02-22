@@ -6,6 +6,8 @@ import com.revworkforce.entity.Employee;
 import com.revworkforce.repository.EmployeeRepository;
 import com.revworkforce.service.EmployeeService;
 import org.springframework.stereotype.Service;
+import com.revworkforce.dto.ManagerResponseDTO;
+
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -54,5 +56,26 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeRepository.save(employee);
 
         return getProfile(employeeId);
+    }
+
+    @Override
+    public ManagerResponseDTO getReportingManager(Long employeeId) {
+
+        Employee employee = employeeRepository.findById(employeeId)
+                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+
+        if (employee.getManager() == null) {
+            throw new ResourceNotFoundException("Reporting manager not assigned");
+        }
+
+        Employee manager = employee.getManager();
+
+        return new ManagerResponseDTO(
+                manager.getId(),
+                manager.getFirstName() + " " + manager.getLastName(),
+                manager.getUser().getEmail(),
+                manager.getDepartment().getName(),
+                manager.getDesignation().getName()
+        );
     }
 }
