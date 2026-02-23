@@ -37,22 +37,24 @@ public class PerformanceReviewServiceImpl implements PerformanceReviewService {
         review.setManager(manager);
         review.setReviewDate(LocalDate.now());
 
+        // 🔥 ADD THIS LINE
+        review.setReviewPeriod(String.valueOf(LocalDate.now().getYear()));
+
         return reviewRepository.save(review);
     }
-
     // ✅ Manager updates review
     @Override
-    public PerformanceReview updateReview(Long reviewId,
-                                          PerformanceReview updatedReview) {
+    public PerformanceReview updateReview(Long id, PerformanceReview review) {
 
-        PerformanceReview existing = reviewRepository.findById(reviewId)
+        PerformanceReview existing = reviewRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Review not found"));
 
-        existing.setRating(updatedReview.getRating());
-        existing.setFeedback(updatedReview.getFeedback());
-        existing.setReviewPeriod(String.valueOf(LocalDate.now().getYear()));
-        existing.setReviewDate(LocalDate.now());
-        existing.setReviewPeriod(updatedReview.getReviewPeriod());
+        existing.setRating(review.getRating());
+        existing.setFeedback(review.getFeedback());
+
+        // ❌ DO NOT SET reviewPeriod here
+        // ❌ DO NOT SET employee
+        // ❌ DO NOT SET manager
 
         return reviewRepository.save(existing);
     }

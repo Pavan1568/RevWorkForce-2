@@ -19,6 +19,10 @@ public class Notification extends BaseEntity {
     @Column(nullable = false)
     private boolean readStatus = false;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     // Getters & Setters
 
     public Long getId() { return id; }
@@ -34,4 +38,12 @@ public class Notification extends BaseEntity {
     public boolean isReadStatus() { return readStatus; }
 
     public void setReadStatus(boolean readStatus) { this.readStatus = readStatus; }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
 }
