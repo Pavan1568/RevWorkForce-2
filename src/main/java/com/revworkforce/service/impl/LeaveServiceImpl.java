@@ -103,7 +103,7 @@ public class LeaveServiceImpl implements LeaveService {
         Notification notification = new Notification();
         notification.setUser(leave.getEmployee().getUser());
         notification.setMessage("Your leave request has been APPROVED.");
-        notification.setRead(false);
+        notification.isReadStatus();
 
         notificationRepository.save(notification);
 
@@ -143,7 +143,7 @@ public class LeaveServiceImpl implements LeaveService {
         Notification notification = new Notification();
         notification.setUser(leave.getEmployee().getUser());
         notification.setMessage("Your leave request has been REJECTED.");
-        notification.setRead(false);
+        notification.isReadStatus();
 
         notificationRepository.save(notification);
 

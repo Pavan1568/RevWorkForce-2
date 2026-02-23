@@ -17,11 +17,12 @@ public class Notification extends BaseEntity {
     private String message;
 
     @Column(nullable = false)
-    private boolean readStatus = false;
+    private boolean readStatus;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
 
     // Getters & Setters
 
@@ -39,11 +40,13 @@ public class Notification extends BaseEntity {
 
     public void setReadStatus(boolean readStatus) { this.readStatus = readStatus; }
 
+    public User getUser() {
+        return user;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
 
-    public User getUser() {
-        return user;
-    }
+
 }

@@ -37,4 +37,25 @@ public class NotificationController {
     public Notification markAsRead(@PathVariable Long notificationId) {
         return notificationService.markAsRead(notificationId);
     }
+    // 👤 Employee - Get unread notifications
+    @GetMapping("/employee/unread/{userId}")
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    public List<Notification> getEmployeeUnread(@PathVariable Long userId) {
+        return notificationService.getUnreadNotifications(userId);
+    }
+
+    // 👤 Employee - Get all notifications
+    @GetMapping("/employee/all/{userId}")
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    public List<Notification> getEmployeeAll(@PathVariable Long userId) {
+        return notificationService.getAllNotifications(userId);
+    }
+
+    // 👤 Employee - Mark as read
+    @PatchMapping("/employee/{notificationId}/read")
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    public Notification markEmployeeRead(@PathVariable Long notificationId) {
+        return notificationService.markAsRead(notificationId);
+    }
+
 }
