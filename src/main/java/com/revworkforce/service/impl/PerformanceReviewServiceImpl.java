@@ -1,5 +1,4 @@
 package com.revworkforce.service.impl;
-
 import com.revworkforce.entity.Employee;
 import com.revworkforce.entity.PerformanceReview;
 import com.revworkforce.exception.ResourceNotFoundException;
@@ -7,7 +6,6 @@ import com.revworkforce.repository.EmployeeRepository;
 import com.revworkforce.repository.PerformanceReviewRepository;
 import com.revworkforce.service.PerformanceReviewService;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -52,6 +50,8 @@ public class PerformanceReviewServiceImpl implements PerformanceReviewService {
 
         existing.setRating(updatedReview.getRating());
         existing.setFeedback(updatedReview.getFeedback());
+        existing.setReviewPeriod(String.valueOf(LocalDate.now().getYear()));
+        existing.setReviewDate(LocalDate.now());
         existing.setReviewPeriod(updatedReview.getReviewPeriod());
 
         return reviewRepository.save(existing);

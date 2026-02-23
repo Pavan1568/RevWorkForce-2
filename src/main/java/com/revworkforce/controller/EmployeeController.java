@@ -18,7 +18,7 @@ public class EmployeeController {
 
     // ✅ Get Reporting Manager
     @GetMapping("/{id}/manager")
-    @PreAuthorize("hasRole('EMPLOYEE')")
+    @PreAuthorize("hasAnyRole('EMPLOYEE','ADMIN')")
     public ManagerResponseDTO getReportingManager(@PathVariable Long id) {
         return employeeService.getReportingManager(id);
     }

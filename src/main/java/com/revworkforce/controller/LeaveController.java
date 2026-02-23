@@ -24,7 +24,7 @@ public class LeaveController {
     // ==============================
     // EMPLOYEE: Apply Leave
     // ==============================
-    @PreAuthorize("hasRole('EMPLOYEE')")
+    @PreAuthorize("hasAnyRole('EMPLOYEE','ADMIN')")
     @PostMapping("/apply")
     public LeaveResponseDTO applyLeave(@Valid @RequestBody ApplyLeaveRequestDTO request) {
 
@@ -79,7 +79,7 @@ public class LeaveController {
     // ==============================
     // EMPLOYEE: View Own Leaves
     // ==============================
-    @PreAuthorize("hasRole('EMPLOYEE')")
+    @PreAuthorize("hasAnyRole('EMPLOYEE','ADMIN')")
     @GetMapping("/employee/{employeeId}")
     public List<LeaveResponseDTO> getEmployeeLeaves(@PathVariable Long employeeId) {
 
@@ -92,7 +92,7 @@ public class LeaveController {
     // ==============================
     // MANAGER: View Team Leaves
     // ==============================
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
     @GetMapping("/manager/{managerId}")
     public List<LeaveResponseDTO> getTeamLeaves(@PathVariable Long managerId) {
 
