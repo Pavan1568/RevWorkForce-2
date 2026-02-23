@@ -22,12 +22,6 @@ public class HolidayController {
         return holidayService.createHoliday(holiday);
     }
 
-    @DeleteMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public void deleteHoliday(@PathVariable Long id) {
-        holidayService.deleteHoliday(id);
-    }
-
     // All roles
     @GetMapping
     public List<Holiday> getAllHolidays() {

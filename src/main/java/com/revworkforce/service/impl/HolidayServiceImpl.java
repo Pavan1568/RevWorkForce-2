@@ -5,6 +5,7 @@ import com.revworkforce.repository.HolidayRepository;
 import com.revworkforce.service.HolidayService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import com.revworkforce.exception.ResourceNotFoundException;
 
 import java.time.LocalDate;
 import java.util.List;

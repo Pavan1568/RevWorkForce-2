@@ -45,11 +45,22 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        // ✅ Swagger
+                        .requestMatchers(
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**"
+                        ).permitAll()
+
+                        // ✅ Admin APIs
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
+
+                        // ✅ All other APIs need authentication
                         .requestMatchers("/api/**").authenticated()
+
+                        // everything else allowed
                         .anyRequest().permitAll()
                 )
-                .httpBasic(httpBasic -> {});; // using basic auth for now
+                .httpBasic(httpBasic -> {});
 
         return http.build();
     }
