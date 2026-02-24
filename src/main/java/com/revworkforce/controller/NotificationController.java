@@ -17,45 +17,15 @@ public class NotificationController {
         this.notificationService = notificationService;
     }
 
-    // 🔔 Get unread notifications
-    @GetMapping("/unread/{managerId}")
-    @PreAuthorize("hasRole('MANAGER')")
-    public List<Notification> getUnread(@PathVariable Long managerId) {
-        return notificationService.getUnreadNotifications(managerId);
-    }
-
-    // 🔔 Get all notifications
-    @GetMapping("/all/{managerId}")
-    @PreAuthorize("hasRole('MANAGER')")
-    public List<Notification> getAll(@PathVariable Long managerId) {
-        return notificationService.getAllNotifications(managerId);
-    }
-
-    // ✅ Mark notification as read
-    @PatchMapping("/{notificationId}/read")
-    @PreAuthorize("hasRole('MANAGER')")
-    public Notification markAsRead(@PathVariable Long notificationId) {
-        return notificationService.markAsRead(notificationId);
-    }
-    // 👤 Employee - Get unread notifications
-    @GetMapping("/employee/unread/{userId}")
-    @PreAuthorize("hasRole('EMPLOYEE')")
-    public List<Notification> getEmployeeUnread(@PathVariable Long userId) {
-        return notificationService.getUnreadNotifications(userId);
-    }
-
-    // 👤 Employee - Get all notifications
-    @GetMapping("/employee/all/{userId}")
-    @PreAuthorize("hasRole('EMPLOYEE')")
-    public List<Notification> getEmployeeAll(@PathVariable Long userId) {
+    @GetMapping("/all/{userId}")
+    @PreAuthorize("hasAnyRole('MANAGER','EMPLOYEE')")
+    public List<Notification> getAll(@PathVariable Long userId) {
         return notificationService.getAllNotifications(userId);
     }
 
-    // 👤 Employee - Mark as read
-    @PatchMapping("/employee/{notificationId}/read")
-    @PreAuthorize("hasRole('EMPLOYEE')")
-    public Notification markEmployeeRead(@PathVariable Long notificationId) {
-        return notificationService.markAsRead(notificationId);
+    @GetMapping("/unread/{userId}")
+    @PreAuthorize("hasAnyRole('MANAGER','EMPLOYEE')")
+    public List<Notification> getUnread(@PathVariable Long userId) {
+        return notificationService.getUnreadNotifications(userId);
     }
-
 }

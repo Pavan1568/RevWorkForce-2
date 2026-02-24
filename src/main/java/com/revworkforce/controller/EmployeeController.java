@@ -1,4 +1,5 @@
 package com.revworkforce.controller;
+import com.revworkforce.dto.CreateEmployeeRequest;
 import com.revworkforce.dto.ManagerResponseDTO;
 import com.revworkforce.service.EmployeeService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -49,5 +50,14 @@ public class EmployeeController {
     @PreAuthorize("hasRole('ADMIN')")
     public List<Employee> searchByDepartment(@RequestParam String value) {
         return employeeService.searchByDepartment(value);
+    }
+
+    @PostMapping("/assign-user/{userId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public Employee createEmployeeForUser(
+            @PathVariable Long userId,
+            @RequestBody CreateEmployeeRequest request) {
+
+        return employeeService.createEmployeeForUser(userId, request);
     }
 }

@@ -4,8 +4,11 @@ import com.revworkforce.dto.ProfileResponseDTO;
 import com.revworkforce.dto.UpdateProfileDTO;
 import java.util.List;
 import com.revworkforce.entity.Employee;
+import com.revworkforce.dto.CreateEmployeeRequest;
 
 public interface EmployeeService {
+
+    Employee createEmployeeForUser(Long userId, CreateEmployeeRequest request);
 
     ProfileResponseDTO getProfile(Long employeeId);
 

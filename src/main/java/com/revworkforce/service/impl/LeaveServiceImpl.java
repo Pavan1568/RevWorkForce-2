@@ -71,7 +71,7 @@ public class LeaveServiceImpl implements LeaveService {
 
         if (manager != null) {
             Notification notification = new Notification();
-            notification.setManager(manager);
+            notification.setUser(manager.getUser());
             notification.setMessage(
                     employee.getFirstName() + " applied for leave from "
                             + savedLeave.getStartDate() + " to "

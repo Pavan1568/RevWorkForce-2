@@ -10,35 +10,40 @@ public class Notification extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(optional = false)
-    private Employee manager;
-
-    @Column(nullable = false, length = 1000)
     private String message;
 
     @Column(nullable = false)
-    private boolean readStatus;
+    private boolean readStatus = false;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")
     private User user;
 
+    // ===== Getters and Setters =====
 
-    // Getters & Setters
+    public Long getId() {
+        return id;
+    }
 
-    public Long getId() { return id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Employee getManager() { return manager; }
+    public String getMessage() {
+        return message;
+    }
 
-    public void setManager(Employee manager) { this.manager = manager; }
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-    public String getMessage() { return message; }
+    public boolean isReadStatus() {
+        return readStatus;
+    }
 
-    public void setMessage(String message) { this.message = message; }
-
-    public boolean isReadStatus() { return readStatus; }
-
-    public void setReadStatus(boolean readStatus) { this.readStatus = readStatus; }
+    public void setReadStatus(boolean readStatus) {
+        this.readStatus = readStatus;
+    }
 
     public User getUser() {
         return user;
@@ -47,6 +52,4 @@ public class Notification extends BaseEntity {
     public void setUser(User user) {
         this.user = user;
     }
-
-
 }

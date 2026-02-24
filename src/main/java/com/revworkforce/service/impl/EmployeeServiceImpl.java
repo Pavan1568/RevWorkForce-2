@@ -3,20 +3,36 @@ import com.revworkforce.dto.ProfileResponseDTO;
 import com.revworkforce.dto.UpdateProfileDTO;
 import com.revworkforce.entity.Employee;
 import com.revworkforce.repository.EmployeeRepository;
+import com.revworkforce.repository.UserRepository;
+import com.revworkforce.repository.DepartmentRepository;
+import com.revworkforce.repository.DesignationRepository;
 import com.revworkforce.service.EmployeeService;
 import org.springframework.stereotype.Service;
 import com.revworkforce.dto.ManagerResponseDTO;
+import com.revworkforce.dto.CreateEmployeeRequest;
 import com.revworkforce.exception.ResourceNotFoundException;
 import java.util.List;
-
+import com.revworkforce.entity.Designation;
+import com.revworkforce.entity.Department;
+import com.revworkforce.entity.User;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+    private final UserRepository userRepository;
+    private final DepartmentRepository departmentRepository;
+    private final DesignationRepository designationRepository;
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository,
+                               UserRepository userRepository,
+                               DepartmentRepository departmentRepository,
+                               DesignationRepository designationRepository) {
+
         this.employeeRepository = employeeRepository;
+        this.userRepository = userRepository;
+        this.departmentRepository = departmentRepository;
+        this.designationRepository = designationRepository;
     }
 
     // ================= GET PROFILE =================
@@ -111,5 +127,31 @@ public class EmployeeServiceImpl implements EmployeeService {
                 manager.getDesignation().getName()
         );
 
+    }
+
+    @Override
+    public Employee createEmployeeForUser(Long userId, CreateEmployeeRequest request) {
+
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
+        Department department = departmentRepository.findById(request.getDepartmentId())
+                .orElseThrow(() -> new ResourceNotFoundException("Department not found"));
+
+        Designation designation = designationRepository.findById(request.getDesignationId())
+                .orElseThrow(() -> new ResourceNotFoundException("Designation not found"));
+
+        Employee employee = new Employee();
+        employee.setUser(user);
+        employee.setFirstName(request.getFirstName());
+        employee.setLastName(request.getLastName());
+        employee.setPhone(request.getPhone());
+        employee.setAddress(request.getAddress());
+        employee.setEmergencyContact(request.getEmergencyContact());
+        employee.setDepartment(department);
+        employee.setDesignation(designation);
+
+        return employeeRepository.save(employee);
     }
 }
