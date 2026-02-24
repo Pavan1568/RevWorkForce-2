@@ -1,20 +1,14 @@
 package com.revworkforce.service.impl;
 import com.revworkforce.dto.ProfileResponseDTO;
 import com.revworkforce.dto.UpdateProfileDTO;
-import com.revworkforce.entity.Employee;
-import com.revworkforce.repository.EmployeeRepository;
-import com.revworkforce.repository.UserRepository;
-import com.revworkforce.repository.DepartmentRepository;
-import com.revworkforce.repository.DesignationRepository;
+import com.revworkforce.entity.*;
+import com.revworkforce.repository.*;
 import com.revworkforce.service.EmployeeService;
 import org.springframework.stereotype.Service;
 import com.revworkforce.dto.ManagerResponseDTO;
 import com.revworkforce.dto.CreateEmployeeRequest;
 import com.revworkforce.exception.ResourceNotFoundException;
 import java.util.List;
-import com.revworkforce.entity.Designation;
-import com.revworkforce.entity.Department;
-import com.revworkforce.entity.User;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -23,16 +17,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final UserRepository userRepository;
     private final DepartmentRepository departmentRepository;
     private final DesignationRepository designationRepository;
+    private final LeaveTypeRepository leaveTypeRepository;
+    private final LeaveBalanceRepository leaveBalanceRepository;
 
     public EmployeeServiceImpl(EmployeeRepository employeeRepository,
                                UserRepository userRepository,
                                DepartmentRepository departmentRepository,
-                               DesignationRepository designationRepository) {
+                               DesignationRepository designationRepository,
+                               LeaveTypeRepository leaveTypeRepository,
+                               LeaveBalanceRepository leaveBalanceRepository) {
 
         this.employeeRepository = employeeRepository;
         this.userRepository = userRepository;
         this.departmentRepository = departmentRepository;
         this.designationRepository = designationRepository;
+        this.leaveBalanceRepository = leaveBalanceRepository;
+        this.leaveTypeRepository = leaveTypeRepository;
     }
 
     // ================= GET PROFILE =================
@@ -151,7 +151,19 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setEmergencyContact(request.getEmergencyContact());
         employee.setDepartment(department);
         employee.setDesignation(designation);
+        Employee savedEmployee = employeeRepository.save(employee);
 
-        return employeeRepository.save(employee);
+        List<LeaveType> leaveTypes = leaveTypeRepository.findAll();
+
+        for (LeaveType leaveType : leaveTypes) {
+            LeaveBalance leaveBalance = new LeaveBalance();
+            leaveBalance.setEmployee(savedEmployee);
+            leaveBalance.setLeaveType(leaveType);
+            leaveBalance.setTotalDays(leaveType.getTotalDays());
+            leaveBalance.setUsedDays(0);
+            leaveBalanceRepository.save(leaveBalance);
+        }
+
+        return savedEmployee;
     }
 }

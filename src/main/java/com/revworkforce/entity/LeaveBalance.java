@@ -13,6 +13,9 @@ public class LeaveBalance extends BaseEntity {
     @ManyToOne(optional = false)
     private Employee employee;
 
+    private int totalDays;
+    private int usedDays;
+
     @ManyToOne(optional = false)
     private LeaveType leaveType;
 
@@ -66,4 +69,21 @@ public class LeaveBalance extends BaseEntity {
     public void setLeaveType(LeaveType leaveType) {
         this.leaveType = leaveType;
     }
+
+    public int getTotalDays() {
+        return totalDays;
+    }
+
+    public void setTotalDays(int totalDays) {
+        this.totalDays = totalDays;
+    }
+
+    public int getUsedDays() {
+        return usedDays;
+    }
+
+    public void setUsedDays(int usedDays) {
+        this.usedDays = usedDays;
+    }
 }
+
