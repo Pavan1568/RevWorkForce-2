@@ -15,6 +15,8 @@ public class Role extends BaseEntity {
     @Column(unique = true, nullable = false)
     private RoleType name;
 
+
+
     // getters & setters
     public RoleType getName() {
         return name;
@@ -23,4 +25,6 @@ public class Role extends BaseEntity {
     public void setName(RoleType name) {
         this.name = name;
     }
+
+
 }

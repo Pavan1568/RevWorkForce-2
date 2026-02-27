@@ -105,6 +105,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.findByDepartment_NameContainingIgnoreCase(department);
     }
 
+    @Override
+    public List<Employee> getAllEmployees() {
+        return employeeRepository.findAll();
+    }
+
 
 
     @Override
@@ -132,6 +137,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee createEmployeeForUser(Long userId, CreateEmployeeRequest request) {
 
+        if (employeeRepository.existsByUserId(userId)) {
+            throw new RuntimeException("Employee already exists for this user");
+        }
+
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
@@ -156,13 +165,22 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<LeaveType> leaveTypes = leaveTypeRepository.findAll();
 
         for (LeaveType leaveType : leaveTypes) {
+
             LeaveBalance leaveBalance = new LeaveBalance();
+
             leaveBalance.setEmployee(savedEmployee);
             leaveBalance.setLeaveType(leaveType);
-            leaveBalance.setTotalDays(leaveType.getTotalDays());
-            leaveBalance.setUsedDays(0);
+
+            int total = leaveType.getTotalDays();
+
+            leaveBalance.setTotalAllocated(total);
+            leaveBalance.setUsedLeaves(0);
+            leaveBalance.setRemainingLeaves(total);
+
             leaveBalanceRepository.save(leaveBalance);
         }
+
+
 
         return savedEmployee;
     }

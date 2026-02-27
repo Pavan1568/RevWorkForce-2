@@ -1,7 +1,9 @@
 package com.revworkforce.controller;
 import com.revworkforce.dto.CreateEmployeeRequest;
+import com.revworkforce.dto.EmployeeResponseDTO;
 import com.revworkforce.dto.ManagerResponseDTO;
 import com.revworkforce.service.EmployeeService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -54,10 +56,29 @@ public class EmployeeController {
 
     @PostMapping("/assign-user/{userId}")
     @PreAuthorize("hasRole('ADMIN')")
-    public Employee createEmployeeForUser(
+    public ResponseEntity<String> createEmployeeForUser(
             @PathVariable Long userId,
             @RequestBody CreateEmployeeRequest request) {
 
-        return employeeService.createEmployeeForUser(userId, request);
+        employeeService.createEmployeeForUser(userId, request);
+        return ResponseEntity.ok("Employee created successfully");
+    }
+
+    @GetMapping
+    public List<EmployeeResponseDTO> getAll() {
+
+        return employeeService.getAllEmployees()
+                .stream()
+                .map(emp -> new EmployeeResponseDTO(
+                        emp.getId(),
+                        emp.getFirstName(),
+                        emp.getLastName(),
+                        emp.getUser().getEmail(),
+                        emp.getDepartment() != null ? emp.getDepartment().getName() : null,
+                        emp.getManager() != null
+                                ? emp.getManager().getFirstName() + " " + emp.getManager().getLastName()
+                                : null
+                ))
+                .toList();
     }
 }

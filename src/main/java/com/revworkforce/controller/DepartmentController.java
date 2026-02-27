@@ -1,5 +1,6 @@
 package com.revworkforce.controller;
 
+import com.revworkforce.dto.DepartmentResponseDTO;
 import com.revworkforce.entity.Department;
 import com.revworkforce.service.DepartmentService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,8 +25,16 @@ public class DepartmentController {
     }
 
     @GetMapping
-    public List<Department> getAllDepartments() {
-        return departmentService.getAllDepartments();
+    public List<DepartmentResponseDTO> getAll() {
+
+        return departmentService.getAllDepartments()
+                .stream()
+                .map(d -> new DepartmentResponseDTO(
+                        d.getId(),
+                        d.getName(),
+                        d.getDescription()
+                ))
+                .toList();
     }
 
     @PutMapping("/{id}")

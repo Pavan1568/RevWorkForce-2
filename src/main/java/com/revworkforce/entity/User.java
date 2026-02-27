@@ -63,4 +63,15 @@ public class User extends BaseEntity {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getEmployeeId() {
+        return employeeId;
+    }
+
+
+
 }

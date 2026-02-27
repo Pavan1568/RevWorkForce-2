@@ -33,11 +33,18 @@ public class LeaveTypeServiceImpl implements LeaveTypeService {
         List<Employee> employees = employeeRepository.findAll();
 
         for (Employee employee : employees) {
+
             LeaveBalance leaveBalance = new LeaveBalance();
+
             leaveBalance.setEmployee(employee);
             leaveBalance.setLeaveType(savedLeaveType);
-            leaveBalance.setTotalDays(savedLeaveType.getTotalDays());
-            leaveBalance.setUsedDays(0);
+
+            int total = savedLeaveType.getTotalDays();
+
+            leaveBalance.setTotalAllocated(total);
+            leaveBalance.setUsedLeaves(0);
+            leaveBalance.setRemainingLeaves(total);
+
             leaveBalanceRepository.save(leaveBalance);
         }
 

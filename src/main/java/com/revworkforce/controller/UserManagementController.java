@@ -1,5 +1,7 @@
 package com.revworkforce.controller;
-
+import com.revworkforce.dto.UserResponseDTO;
+import java.util.stream.Collectors;
+import com.revworkforce.dto.UserResponseDTO;
 import com.revworkforce.entity.User;
 import com.revworkforce.service.UserManagementService;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,10 +29,22 @@ public class UserManagementController {
 
     // ✅ Get All Users
     @GetMapping
-    public List<User> getAllUsers() {
-        return userManagementService.getAllUsers();
-    }
+    public List<UserResponseDTO> getAllUsers() {
 
+        return userManagementService.getAllUsers()
+                .stream()
+                .map(user -> new UserResponseDTO(
+                        user.getId(),
+                        user.getEmail(),
+                        user.getEmployeeId(),
+                        user.isActive(),
+                        user.getRoles()
+                                .stream()
+                                .map(role -> role.getName().name()) // assuming Role has getName()
+                                .collect(java.util.stream.Collectors.toSet())
+                ))
+                .toList();
+    }
     // ✅ Activate / Deactivate User
     @PutMapping("/{id}/status")
     public User updateUserStatus(@PathVariable Long id,

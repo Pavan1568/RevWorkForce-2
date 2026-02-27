@@ -1,5 +1,6 @@
 package com.revworkforce.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -34,6 +35,7 @@ public class Employee extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "manager_id")
+    @JsonIgnore
     private Employee manager;
 
     // getters & setters

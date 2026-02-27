@@ -23,4 +23,6 @@ public interface EmployeeService {
     List<Employee> searchByEmail(String email);
 
     List<Employee> searchByDepartment(String department);
+
+    List<Employee> getAllEmployees();
 }
