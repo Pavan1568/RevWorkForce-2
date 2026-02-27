@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin/leave-types")
-@PreAuthorize("hasRole('ADMIN')")
+@RequestMapping("/api/leave-types")
 public class LeaveTypeController {
 
     private final LeaveTypeService leaveTypeService;
@@ -18,23 +17,29 @@ public class LeaveTypeController {
         this.leaveTypeService = leaveTypeService;
     }
 
-    @PostMapping
-    public LeaveType createLeaveType(@RequestBody LeaveType leaveType) {
-        return leaveTypeService.createLeaveType(leaveType);
-    }
-
+    // ✅ Accessible to all authenticated users
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN','MANAGER','EMPLOYEE')")
     public List<LeaveType> getAllLeaveTypes() {
         return leaveTypeService.getAllLeaveTypes();
     }
 
+    // 🔐 Admin-only operations
+    @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    public LeaveType createLeaveType(@RequestBody LeaveType leaveType) {
+        return leaveTypeService.createLeaveType(leaveType);
+    }
+
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public LeaveType updateLeaveType(@PathVariable Long id,
                                      @RequestBody LeaveType leaveType) {
         return leaveTypeService.updateLeaveType(id, leaveType);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteLeaveType(@PathVariable Long id) {
         leaveTypeService.deleteLeaveType(id);
     }
