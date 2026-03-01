@@ -1,0 +1,31 @@
+<div class="container mt-3">
+  <h2 class="mb-3">Team Members</h2>
+
+  <div class="table-responsive">
+    <table class="table table-sm table-striped table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Department</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let member of teamMembers">
+          <td>{{ member.id }}</td>
+          <td>{{ member.firstName }} {{ member.lastName }}</td>
+          <td>{{ member.user?.email }}</td>
+          <td>{{ member.department?.name }}</td>
+        </tr>
+
+        <tr *ngIf="teamMembers.length === 0">
+          <td colspan="4" class="text-center text-muted">
+            No team members found.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

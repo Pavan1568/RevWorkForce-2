@@ -1,0 +1,158 @@
+<div class="container mt-3">
+  <h2 class="mb-3">Employees</h2>
+
+  <!-- Employees table -->
+  <div class="table-responsive mb-4">
+    <table class="table table-sm table-striped table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Department</th>
+          <!-- <th scope="col">Designation</th> -->
+          <th scope="col">Manager</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let emp of employees">
+          <td>{{ emp.id }}</td>
+          <td>{{ emp.firstName }}</td>
+          <td>{{ emp.lastName }}</td>
+          <td>{{ emp.user?.email || emp.email }}</td>
+          <td>{{ emp.departmentName }}</td>
+          <td>{{ emp.managerName }}</td>
+        </tr>
+        <tr *ngIf="employees.length === 0">
+          <td colspan="7" class="text-center text-muted">
+            No employees found.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Create employee for existing user -->
+  <div class="card">
+    <div class="card-header">
+      <strong>Create Employee (Assign to User)</strong>
+    </div>
+    <div class="card-body">
+      <form #empForm="ngForm" (ngSubmit)="createEmployeeForUser()">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label for="userId" class="form-label">User</label>
+            <select
+              id="userId"
+              name="userId"
+              class="form-select"
+              required
+              [(ngModel)]="selectedUserId"
+            >
+              <option [ngValue]="null">-- Select User --</option>
+              <option *ngFor="let u of users" [ngValue]="u.id">
+                {{ u.email }} (ID: {{ u.id }})
+              </option>
+            </select>
+          </div>
+
+          <div class="col-md-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              class="form-control"
+              required
+              [(ngModel)]="newEmployee.firstName"
+            />
+          </div>
+          <div class="col-md-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              class="form-control"
+              required
+              [(ngModel)]="newEmployee.lastName"
+            />
+          </div>
+
+          <div class="col-md-4">
+            <label for="phone" class="form-label">Phone (optional)</label>
+            <input
+              type="text"
+              id="phone"
+              name="phone"
+              class="form-control"
+              [(ngModel)]="newEmployee.phone"
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="address" class="form-label">Address (optional)</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              class="form-control"
+              [(ngModel)]="newEmployee.address"
+            />
+          </div>
+          <div class="col-md-4">
+            <label for="emergencyContact" class="form-label">Emergency Contact (optional)</label>
+            <input
+              type="text"
+              id="emergencyContact"
+              name="emergencyContact"
+              class="form-control"
+              [(ngModel)]="newEmployee.emergencyContact"
+            />
+          </div>
+
+          <div class="col-md-6">
+            <label for="departmentId" class="form-label">Department</label>
+            <select
+              id="departmentId"
+              name="departmentId"
+              class="form-select"
+              required
+              [(ngModel)]="newEmployee.departmentId"
+            >
+              <option [ngValue]="null">-- Select Department --</option>
+              <option *ngFor="let d of departments" [ngValue]="d.id">
+                {{ d.name }} (ID: {{ d.id }})
+              </option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="designationId" class="form-label">Designation ID</label>
+            <input
+              type="number"
+              id="designationId"
+              name="designationId"
+              class="form-control"
+              required
+              [(ngModel)]="newEmployee.designationId"
+            />
+            <div class="form-text">
+              No designation API found in backend; enter the designation ID directly.
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-3">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="empForm.invalid || isSubmitting"
+          >
+            {{ isSubmitting ? 'Creating...' : 'Create Employee' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

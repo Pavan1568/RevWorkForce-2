@@ -1,0 +1,42 @@
+<div class="container mt-3">
+  <h2 class="mb-3">Team Leave Balance</h2>
+  <p class="text-muted small">View leave balance for a team member by Employee ID.</p>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <form class="row g-3 align-items-end" (ngSubmit)="loadBalance()" #f="ngForm">
+        <div class="col-md-4">
+          <label for="employeeId" class="form-label">Employee ID</label>
+          <input type="number" id="employeeId" name="employeeId" class="form-control" required [(ngModel)]="employeeId" />
+        </div>
+        <div class="col-md-3">
+          <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Load Balance</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-sm table-striped table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">Leave Type</th>
+          <th scope="col">Total</th>
+          <th scope="col">Used</th>
+          <th scope="col">Remaining</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let b of balances">
+          <td>{{ b.leaveType?.name || b.leaveTypeName || '-' }}</td>
+          <td>{{ b.totalAllocated }}</td>
+          <td>{{ b.usedLeaves }}</td>
+          <td>{{ b.remainingLeaves }}</td>
+        </tr>
+        <tr *ngIf="balances.length === 0">
+          <td colspan="4" class="text-center text-muted">No balance data. Enter Employee ID and click Load Balance.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="container mt-3" *ngIf="!isLoading; else loadingTpl">
+  <h2 class="mb-3">My Profile</h2>
+
+  <!-- Employee ID input -->
+  <div class="card mb-3">
+    <div class="card-body">
+      <form (ngSubmit)="loadProfile()" #profileForm="ngForm" class="row g-3 align-items-end">
+        <div class="col-md-4">
+          <label for="employeeId" class="form-label">Employee ID</label>
+          <input
+            type="number"
+            id="employeeId"
+            name="employeeId"
+            class="form-control"
+            required
+            [(ngModel)]="employeeId"
+          />
+        </div>
+        <div class="col-md-3">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="profileForm.invalid"
+          >
+            Load Profile
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="profile; else noProfileTpl" class="card">
+    <div class="card-header">
+      <strong>{{ profile.fullName || profile.name || profile.email }}</strong>
+    </div>
+    <div class="card-body">
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <strong>Email:</strong> {{ profile.email }}
+        </div>
+        <div class="col-md-6">
+          <strong>Phone:</strong> {{ profile.phone }}
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <strong>Address:</strong> {{ profile.address }}
+        </div>
+        <div class="col-md-6">
+          <strong>Emergency Contact:</strong> {{ profile.emergencyContact }}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <strong>Manager:</strong> {{ profile.managerName }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadingTpl>
+  <div class="container mt-3">
+    <p>Loading profile...</p>
+  </div>
+</ng-template>
+
+<ng-template #noProfileTpl>
+  <p class="text-muted">No profile information available.</p>
+</ng-template>

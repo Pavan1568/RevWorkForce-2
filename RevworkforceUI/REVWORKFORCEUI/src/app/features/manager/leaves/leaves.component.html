@@ -1,0 +1,45 @@
+<div class="container mt-3">
+  <h2 class="mb-3">Team Leaves</h2>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <form class="row g-3 align-items-end" (ngSubmit)="loadLeaves()" #f="ngForm">
+        <div class="col-md-4">
+          <label for="managerId" class="form-label">Manager ID</label>
+          <input type="number" id="managerId" name="managerId" class="form-control" required [(ngModel)]="managerId" />
+        </div>
+        <div class="col-md-3">
+          <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Load Leaves</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-sm table-striped table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Employee ID</th>
+          <th scope="col">Start</th>
+          <th scope="col">End</th>
+          <th scope="col">Reason</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let l of leaves">
+          <td>{{ l.id }}</td>
+          <td>{{ l.employeeId }}</td>
+          <td>{{ l.startDate | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ l.endDate | date: 'yyyy-MM-dd' }}</td>
+          <td>{{ l.reason }}</td>
+          <td>{{ l.status }}</td>
+        </tr>
+        <tr *ngIf="leaves.length === 0">
+          <td colspan="6" class="text-center text-muted">No leaves. Enter Manager ID and click Load Leaves.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

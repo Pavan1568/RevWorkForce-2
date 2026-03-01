@@ -1,0 +1,30 @@
+.page-title {
+  margin-bottom: 20px;
+}
+
+.btn-primary {
+  background: #2563eb;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.user-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.user-table th,
+.user-table td {
+  padding: 12px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.user-table th {
+  background: #f3f4f6;
+}

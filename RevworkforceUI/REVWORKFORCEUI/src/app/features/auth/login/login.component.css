@@ -1,0 +1,19 @@
+.login-wrapper {
+  height: 100vh;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-card {
+  width: 380px;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+}
+
+.brand {
+  font-weight: 700;
+  color: #1e293b;
+}

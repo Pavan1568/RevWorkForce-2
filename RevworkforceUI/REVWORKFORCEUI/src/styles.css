@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  background: #f4f6f9;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.table {
+  border-radius: 12px;
+  overflow: hidden;
+  background: white;
+}
+
+.table thead {
+  background: #f1f3f5;
+}

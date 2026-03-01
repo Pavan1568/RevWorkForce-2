@@ -1,0 +1,25 @@
+/* Page Background */
+:host {
+  display: block;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+/* Quick Action Cards */
+.action-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: 0.25s ease;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.action-card:hover {
+  transform: translateY(-6px);
+  background: #2563eb;
+  color: white;
+  box-shadow: 0 14px 32px rgba(37, 99, 235, 0.25);
+}

@@ -1,0 +1,41 @@
+<div class="layout-container">
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+
+    <h3 class="brand">RevWorkForce</h3>
+
+    <div *ngFor="let menu of menuItems">
+
+      <!-- Main Menu -->
+      <div class="menu-title"
+           (click)="toggle(menu.label)">
+        {{ menu.label }}
+        <span class="float-end">
+          {{ openMenu === menu.label ? '−' : '+' }}
+        </span>
+      </div>
+
+      <!-- Submenu -->
+      <div *ngIf="openMenu === menu.label" class="submenu">
+        <a *ngFor="let child of menu.children"
+           [routerLink]="child.route"
+           routerLinkActive="active-link">
+          {{ child.label }}
+        </a>
+      </div>
+
+    </div>
+
+    <button (click)="logout()" class="logout-btn">
+      Logout
+    </button>
+
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

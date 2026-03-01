@@ -1,0 +1,33 @@
+<div class="container mt-3">
+  <h2 class="mb-3">Assign Manager</h2>
+
+  <div class="card">
+    <div class="card-body">
+      <form (ngSubmit)="assign()" #f="ngForm">
+        <div class="row g-3">
+          <div class="col-md-5">
+            <label for="employeeId" class="form-label">Employee</label>
+            <select id="employeeId" name="employeeId" class="form-select" required [(ngModel)]="selectedEmployeeId">
+              <option [ngValue]="null">-- Select Employee --</option>
+              <option *ngFor="let e of employees" [ngValue]="e.id">{{ e.firstName }} {{ e.lastName }}</option>
+            </select>
+          </div>
+          <div class="col-md-5">
+            <label for="managerId" class="form-label">Manager</label>
+            <select id="managerId" name="managerId" class="form-select" required [(ngModel)]="selectedManagerId">
+              <option [ngValue]="null">-- Select Manager --</option>
+              <option *ngFor="let manager of managers" [ngValue]="manager.id">
+              {{ manager.firstName }} {{ manager.lastName }}
+              </option>
+            </select>
+          </div>
+          <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-primary" [disabled]="f.invalid || isSubmitting">
+              {{ isSubmitting ? 'Assigning...' : 'Assign' }}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

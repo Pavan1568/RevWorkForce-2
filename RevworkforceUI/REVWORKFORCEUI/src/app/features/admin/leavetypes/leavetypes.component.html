@@ -1,0 +1,82 @@
+<div class="container mt-3">
+  <h2 class="mb-3">Leave Types</h2>
+
+  <!-- Leave types table -->
+  <div class="table-responsive mb-4">
+    <table class="table table-sm table-striped table-bordered">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col" class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let lt of leaveTypes">
+          <td>{{ lt.id }}</td>
+          <td>{{ lt.name }}</td>
+          <td>{{ lt.description }}</td>
+          <td class="text-center">
+            <button
+              type="button"
+              class="btn btn-sm btn-danger"
+              (click)="deleteLeaveType(lt)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="leaveTypes.length === 0">
+          <td colspan="4" class="text-center text-muted">
+            No leave types found.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Create leave type form -->
+  <div class="card">
+    <div class="card-header">
+      <strong>Add New Leave Type</strong>
+    </div>
+    <div class="card-body">
+      <form #ltForm="ngForm" (ngSubmit)="createLeaveType()">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label for="ltName" class="form-label">Name</label>
+            <input
+              type="text"
+              id="ltName"
+              name="name"
+              class="form-control"
+              required
+              [(ngModel)]="newLeaveType.name"
+            />
+          </div>
+          <div class="col-md-8">
+            <label for="ltDesc" class="form-label">Description (optional)</label>
+            <input
+              type="text"
+              id="ltDesc"
+              name="description"
+              class="form-control"
+              [(ngModel)]="newLeaveType.description"
+            />
+          </div>
+        </div>
+
+        <div class="mt-3">
+          <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="ltForm.invalid || isSubmitting"
+          >
+            {{ isSubmitting ? 'Saving...' : 'Add Leave Type' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

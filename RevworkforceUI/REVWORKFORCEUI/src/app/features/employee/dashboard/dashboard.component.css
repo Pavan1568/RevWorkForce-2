@@ -1,0 +1,23 @@
+:host {
+  display: block;
+  background: linear-gradient(135deg, #f5f3ff, #faf5ff);
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+.action-card {
+  background: white;
+  border-radius: 18px;
+  padding: 22px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transition: 0.25s ease;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.action-card:hover {
+  transform: translateY(-6px);
+  background: #7c3aed;
+  color: white;
+  box-shadow: 0 14px 32px rgba(124, 58, 237, 0.25);
+}
