@@ -1,7 +1,10 @@
 package com.revworkforce.repository;
 
 import com.revworkforce.entity.Employee;
+import com.revworkforce.entity.User;
+import com.revworkforce.enums.RoleType;
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
 
 import java.util.List;
 
@@ -17,4 +20,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     List<Employee> findByDepartment_NameContainingIgnoreCase(String departmentName);
 
+    List<Employee> findByUser_Roles_Name(RoleType roleType);
+
+    Optional<Employee> findByUser(User user);
 }

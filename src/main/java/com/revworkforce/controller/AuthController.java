@@ -3,6 +3,10 @@ import java.util.HashMap;
 import java.util.Map;
 import com.revworkforce.dto.AuthRequest;
 import com.revworkforce.dto.AuthResponse;
+import com.revworkforce.entity.Employee;
+import com.revworkforce.entity.User;
+import com.revworkforce.repository.EmployeeRepository;
+import com.revworkforce.repository.UserRepository;
 import com.revworkforce.security.JwtUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,12 +18,17 @@ public class AuthController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+    private final UserRepository userRepository;
+    private final EmployeeRepository employeeRepository;
 
 
-    public AuthController(AuthenticationManager authenticationManager,
+    public AuthController(AuthenticationManager authenticationManager, UserRepository userRepository,
+                          EmployeeRepository employeeRepository,
                           JwtUtil jwtUtil) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
+        this.userRepository = userRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     @PostMapping("/login")
@@ -34,7 +43,14 @@ public class AuthController {
 
         String token = jwtUtil.generateToken(request.getEmail());
 
-        return new AuthResponse(token);
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Employee employee = employeeRepository.findByUser(user).orElse(null);
+
+        Long employeeId = employee != null ? employee.getId() : null;
+
+        return new AuthResponse(token, employeeId);
     }
 
 //    @PostMapping("/login")

@@ -3,10 +3,12 @@ import com.revworkforce.dto.ApplyLeaveRequestDTO;
 import com.revworkforce.dto.LeaveResponseDTO;
 import com.revworkforce.entity.LeaveApplication;
 import com.revworkforce.entity.LeaveBalance;
+import com.revworkforce.enums.LeaveStatus;
 import com.revworkforce.service.LeaveService;
+import com.revworkforce.repository.LeaveApplicationRepository;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
+import com.revworkforce.enums.LeaveStatus;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,9 +18,11 @@ import java.util.stream.Collectors;
 public class LeaveController {
 
     private final LeaveService leaveService;
+    private final LeaveApplicationRepository leaveApplicationRepository;
 
-    public LeaveController(LeaveService leaveService) {
+    public LeaveController(LeaveService leaveService, LeaveApplicationRepository leaveApplicationRepository) {
         this.leaveService = leaveService;
+        this.leaveApplicationRepository = leaveApplicationRepository;
     }
 
     // ==============================
@@ -38,6 +42,8 @@ public class LeaveController {
 
         return mapToResponseDTO(leaveApplication);
     }
+
+
 
     // ==============================
     // EMPLOYEE: Cancel Leave
@@ -61,6 +67,12 @@ public class LeaveController {
 
         LeaveApplication leaveApplication = leaveService.approveLeave(id, comment);
         return mapToResponseDTO(leaveApplication);
+    }
+
+    @GetMapping("/pending/count")
+    @PreAuthorize("hasRole('ADMIN')")
+    public long getPendingLeaveCount() {
+        return leaveApplicationRepository.countByStatus(LeaveStatus.PENDING);
     }
 
     // ==============================
@@ -115,6 +127,7 @@ public class LeaveController {
                 .collect(Collectors.toList());
     }
 
+
     @GetMapping("/manager/{managerId}/calendar")
     @PreAuthorize("hasRole('MANAGER')")
     public List<LeaveApplication> getTeamLeaveCalendar(@PathVariable Long managerId) {
@@ -145,4 +158,6 @@ public class LeaveController {
 
         return response;
     }
+
+
 }

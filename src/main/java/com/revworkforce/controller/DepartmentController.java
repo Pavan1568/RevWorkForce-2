@@ -2,6 +2,7 @@ package com.revworkforce.controller;
 
 import com.revworkforce.dto.DepartmentResponseDTO;
 import com.revworkforce.entity.Department;
+import com.revworkforce.repository.DepartmentRepository;
 import com.revworkforce.service.DepartmentService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +15,12 @@ import java.util.List;
 public class DepartmentController {
 
     private final DepartmentService departmentService;
+    private final DepartmentRepository departmentRepository;
 
-    public DepartmentController(DepartmentService departmentService) {
+    public DepartmentController(DepartmentService departmentService,
+                                DepartmentRepository departmentRepository) {
         this.departmentService = departmentService;
+        this.departmentRepository = departmentRepository;
     }
 
     @PostMapping
@@ -26,7 +30,6 @@ public class DepartmentController {
 
     @GetMapping
     public List<DepartmentResponseDTO> getAll() {
-
         return departmentService.getAllDepartments()
                 .stream()
                 .map(d -> new DepartmentResponseDTO(
@@ -35,6 +38,11 @@ public class DepartmentController {
                         d.getDescription()
                 ))
                 .toList();
+    }
+
+    @GetMapping("/count")
+    public long getDepartmentCount() {
+        return departmentRepository.count();
     }
 
     @PutMapping("/{id}")

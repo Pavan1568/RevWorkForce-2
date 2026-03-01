@@ -1,10 +1,8 @@
 package com.revworkforce.service;
-import com.revworkforce.dto.ManagerResponseDTO;
-import com.revworkforce.dto.ProfileResponseDTO;
-import com.revworkforce.dto.UpdateProfileDTO;
+import com.revworkforce.dto.*;
+
 import java.util.List;
 import com.revworkforce.entity.Employee;
-import com.revworkforce.dto.CreateEmployeeRequest;
 
 public interface EmployeeService {
 
@@ -25,4 +23,12 @@ public interface EmployeeService {
     List<Employee> searchByDepartment(String department);
 
     List<Employee> getAllEmployees();
+
+    List<Employee> getAllManagers();
+
+//    List<Employee> findByManager_Id(Long managerId);
+
+    List<Employee> getTeamMembers(Long managerId);
+
+
 }

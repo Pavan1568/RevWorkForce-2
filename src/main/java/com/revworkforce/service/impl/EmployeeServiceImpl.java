@@ -2,6 +2,7 @@ package com.revworkforce.service.impl;
 import com.revworkforce.dto.ProfileResponseDTO;
 import com.revworkforce.dto.UpdateProfileDTO;
 import com.revworkforce.entity.*;
+import com.revworkforce.enums.RoleType;
 import com.revworkforce.repository.*;
 import com.revworkforce.service.EmployeeService;
 import org.springframework.stereotype.Service;
@@ -74,6 +75,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return getProfile(employeeId);
     }
+
+    @Override
+    public List<Employee> getTeamMembers(Long managerId) {
+        return employeeRepository.findByManager_Id(managerId);
+    }
+
     @Override
     public void assignManager(Long employeeId, Long managerId) {
 
@@ -132,6 +139,10 @@ public class EmployeeServiceImpl implements EmployeeService {
                 manager.getDesignation().getName()
         );
 
+    }
+    @Override
+    public List<Employee> getAllManagers() {
+        return employeeRepository.findByUser_Roles_Name(RoleType.ROLE_MANAGER);
     }
 
     @Override
