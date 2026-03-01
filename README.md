@@ -24,7 +24,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Track pending leave applications
 
-- Access company announcements
+- Access company announcements 
 
 ### **Profile Management**
 
