@@ -1,6 +1,6 @@
  # **RevWorkforce – Human Resource Management System**
 
- ## 📌 **Project Overview**
+ ##📌 **Project Overview**
 
 RevWorkforce is a full-stack monolithic Human Resource Management (HRM) web application built to streamline employee lifecycle management, leave administration, and performance evaluation processes within an organization.
 
@@ -8,8 +8,9 @@ The system supports three hierarchical roles — Employee, Manager, and Admin �
 
 The application is designed with scalability, clean architecture, and real-world HR workflows in mind.
 
-🚀 Key Features
-🔐 Authentication & Security
+##**🚀 Key Features**
+
+##**🔐 Authentication & Security**
 
 - Role-based login system (Employee / Manager / Admin)
 
@@ -17,7 +18,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Controlled access to features based on user roles
 
-## 👤 **Employee Module Dashboard**
+##**👤 Employee Module Dashboard**
 
 - View leave balance summary
 
@@ -25,7 +26,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Access company announcements
 
- Profile Management
+ ###Profile Management
 
 - View complete profile details
 
@@ -33,7 +34,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - View reporting manager details
 
-Leave Management
+ ###Leave Management
 
 - View leave balance (Casual, Sick, Paid Leave)
 
