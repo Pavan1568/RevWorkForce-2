@@ -116,7 +116,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 ## **🛠 Admin Module**
 
-### **Employee Management:**
+### **Employee Management**
 
 - Add new employees with full HR details
 
