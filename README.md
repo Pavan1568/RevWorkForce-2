@@ -182,7 +182,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Application Architecture Diagram
 
-Testing Artifacts:
+- Testing Artifacts
 
 ## **🧠 Real-World Problem Solved**
 
@@ -212,7 +212,7 @@ RevWorkforce centralizes these processes into a unified digital system, improvin
 
 - Modular HR Administration
 
-#### **Search & Filtering Optimization**
+- Search & Filtering Optimization
 
 ## **📈 Future Enhancements:**
 
@@ -261,11 +261,11 @@ REST API exposure for third-party integrations:
 
 - Reporting & HR Analytics Dashboard
 
-##Login Page
+## **Login Page**
 ![Login](RevworkforceUI/REVWORKFORCEUI/images/login.png)
-#Admin page
+## **Admin page**
 ![Admin dashboard](RevworkforceUI/REVWORKFORCEUI/images/admin_dashboard.png)
-#Manager Page
+## **Manager Page**
 ![Manager dashboard](RevworkforceUI/REVWORKFORCEUI/images/manager_dashboard.png)
-#Employee page
+## **Employee page**
 ![Employee dashboard](RevworkforceUI/REVWORKFORCEUI/images/employee_dashboard.png)
