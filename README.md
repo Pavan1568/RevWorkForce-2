@@ -257,3 +257,12 @@ REST API exposure for third-party integrations:
 - In-App Notification System
 
 - Reporting & HR Analytics Dashboard
+
+##Login Page
+![Login](images/login.png)
+#Admin page
+![Admin dashboard](images/admin_dashboard.png)
+#Manager Page
+![Manager dashboard](images/manager_dashboard.png)
+#Employee page
+![Employee dashboard](images/employee_dashboard)
