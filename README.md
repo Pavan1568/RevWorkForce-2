@@ -261,8 +261,8 @@ REST API exposure for third-party integrations:
 ##Login Page
 ![Login](images/login.png)
 #Admin page
-![Admin dashboard](images/admin_dashboard.png)
+![Admin dashboard](RevworkforceUI/REVWORKFORCEUI/images/login.png)
 #Manager Page
-![Manager dashboard](images/manager_dashboard.png)
+![Manager dashboard](RevworkforceUI/REVWORKFORCEUI/images/manager_dashboard.png)
 #Employee page
-![Employee dashboard](images/employee_dashboard)
+![Employee dashboard](RevworkforceUI/REVWORKFORCEUI/images/employee_dashboard)
