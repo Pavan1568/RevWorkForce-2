@@ -6,7 +6,7 @@ RevWorkforce is a full-stack monolithic Human Resource Management (HRM) web appl
 
 The system supports three hierarchical roles — Employee, Manager, and Admin — with role-based dashboards, secure authentication, automated notifications, and structured data management.
 
-The application is designed with scalability, clean architecture, and real-world HR workflows in mind.
+The application is designed with scalability, clean architecture, and real-world HR workflows in mind. 
 
 ## **🚀 Key Features**
 
