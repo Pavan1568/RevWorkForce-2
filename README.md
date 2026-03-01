@@ -259,10 +259,10 @@ REST API exposure for third-party integrations:
 - Reporting & HR Analytics Dashboard
 
 ##Login Page
-![Login](images/login.png)
+![Login](RevworkforceUI/REVWORKFORCEUI/images/login.png)
 #Admin page
-![Admin dashboard](RevworkforceUI/REVWORKFORCEUI/images/login.png)
+![Admin dashboard](RevworkforceUI/REVWORKFORCEUI/images/admin_dashboard.png)
 #Manager Page
 ![Manager dashboard](RevworkforceUI/REVWORKFORCEUI/images/manager_dashboard.png)
 #Employee page
-![Employee dashboard](RevworkforceUI/REVWORKFORCEUI/images/employee_dashboard)
+![Employee dashboard](RevworkforceUI/REVWORKFORCEUI/images/employee_dashboard.png)
