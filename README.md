@@ -128,7 +128,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Search & filter employees (ID, name, department, designation)
 
-### **Leave Administration:**
+### **Leave Administration**
  
 - Configure leave types
 
@@ -140,7 +140,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Generate leave reports (employee-wise / department-wise)
 
-### **System Configuration:** 
+### **System Configuration** 
 
 - Manage departments
 
@@ -152,7 +152,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Reporting & Analytics
 
-### **HR dashboard with key metrics:**
+### **HR dashboard with key metrics**
 
 - Total employees
 
@@ -162,7 +162,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Leave utilization reports
 
-## **🏗 System Architecture:**
+## **🏗 System Architecture**
 
 ## **RevWorkforce follows a monolithic full-stack architecture, including:**
 
@@ -176,7 +176,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - In-App Notification System
 
-### **Project documentation includes:**
+### **Project documentation includes**
 
 - ERD (Entity Relationship Diagram)
 
@@ -214,7 +214,7 @@ RevWorkforce centralizes these processes into a unified digital system, improvin
 
 - Search & Filtering Optimization
 
-## **📈 Future Enhancements:**
+## **📈 Future Enhancements**
 
 - Email notification integration
 
