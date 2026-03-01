@@ -48,7 +48,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Receive real-time in-app notifications on leave decisions
 
-#### **Performance Management**
+### **Performance Management**
 
 - Create and submit performance review documents
 
@@ -70,7 +70,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Receive notification upon review feedback
 
-#### **Employee Directory**
+### **Employee Directory**
 
 - Search employees by name or department
 
@@ -94,7 +94,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Get notified when team members apply for leave
 
-#### **Performance Review Management**
+### **Performance Review Management**
 
 - Review submitted employee performance documents
 
@@ -108,7 +108,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Notification system for review submissions
 
-#### **Team Management**
+### **Team Management**
 
 - View team hierarchy structure
 
@@ -116,7 +116,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 ## **🛠 Admin Module**
 
-#### **Employee Management:**
+### **Employee Management:**
 
 - Add new employees with full HR details
 
@@ -128,7 +128,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Search & filter employees (ID, name, department, designation)
 
-#### **Leave Administration:**
+### **Leave Administration:**
  
 - Configure leave types
 
@@ -140,7 +140,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Generate leave reports (employee-wise / department-wise)
 
-#### **System Configuration:** 
+### **System Configuration:** 
 
 - Manage departments
 
@@ -152,7 +152,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Reporting & Analytics
 
-#### **HR dashboard with key metrics:**
+### **HR dashboard with key metrics:**
 
 - Total employees
 
