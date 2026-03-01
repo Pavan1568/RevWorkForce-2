@@ -1,0 +1,20 @@
+package com.revworkforce.dto;
+
+public class AuthResponse {
+
+    private String token;
+    private Long employeeId;   // 👈 ADD THIS
+
+    public AuthResponse(String token, Long employeeId) {
+        this.token = token;
+        this.employeeId = employeeId;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public Long getEmployeeId() {
+        return employeeId;
+    }
+}
