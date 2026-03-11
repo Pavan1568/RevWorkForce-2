@@ -178,7 +178,7 @@ RevWorkforce follows a monolithic full-stack architecture, including:
 - ERD (Entity Relationship Diagram)
 
 - Application Architecture Diagram
-
+------------------------------
 🧠 **Real-World Problem Solved**
 
 Organizations often struggle with:
@@ -205,7 +205,6 @@ Organizations often struggle with:
 
 - Modular HR Administration
 
-Search & Filtering Optimization
 ----------------
 ### 📈**Future Enhancements:**
 
