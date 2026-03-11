@@ -7,8 +7,8 @@ The system supports three hierarchical roles — Employee, Manager, and Admin �
 
 The application is designed with scalability, clean architecture, and real-world HR workflows in mind.
 
-**### 🚀 Key Features**
-### **🔐 Authentication & Security**
+### 🚀 Key Features
+### 🔐 **Authentication & Security**
 
 - Role-based login system (Employee / Manager / Admin)
 
