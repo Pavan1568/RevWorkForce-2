@@ -259,7 +259,11 @@ REST API exposure for third-party integrations:
 - Reporting & HR Analytics Dashboard
 
 ## **The Application UI of different pages**
+## **Login Page**
 ![Login](images/login.png)
+## **Admin Dashboard**
 ![Admin](images/admin_dashboard.png)
+## **Manager Dashboard**
 ![Manager](images/manager_dashboard.png)
+## **Employee Dashboard**
 ![Employee](images/employee_dashboard.png)
