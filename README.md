@@ -73,7 +73,7 @@ Add:
 - Search employees by name or department
 
 - View company-wide employee information
-
+-------------------------------------------------------------------
 ### 👨‍💼 **Manager Module**
 
 - Managers inherit all Employee features plus:
@@ -111,7 +111,7 @@ Add:
 - View team hierarchy structure
 
 - Access team member profiles
-
+-----------------------------------------------------------------------------
 ### 🛠 **Admin Module**
 #### Employee Management:
 
@@ -158,7 +158,7 @@ HR dashboard with key metrics:
 - Employee reports
 
 - Leave utilization reports
-
+-------------------------------------------------
 ### 🏗 **System Architecture:**
 
 RevWorkforce follows a monolithic full-stack architecture, including:
@@ -180,7 +180,7 @@ RevWorkforce follows a monolithic full-stack architecture, including:
 - Application Architecture Diagram
 
 #### Testing Artifacts:
-
+------------------------------------
 🧠 **Real-World Problem Solved**
 
 Organizations often struggle with:
@@ -194,7 +194,7 @@ Organizations often struggle with:
 - Poor visibility into employee goal tracking
 
 RevWorkforce centralizes these processes into a unified digital system, improving operational efficiency, accountability, and transparency.
-
+----------------
 ### 🎯**Technical Highlights**
 
 - Role-Based Access Control
@@ -210,7 +210,7 @@ RevWorkforce centralizes these processes into a unified digital system, improvin
 - Modular HR Administration
 
 Search & Filtering Optimization
-
+----------------
 ### 📈**Future Enhancements:**
 
 - Email notification integration
@@ -222,7 +222,7 @@ Search & Filtering Optimization
 REST API exposure for third-party integrations:
 
 - Microservices refactor for scalability
-
+---------------------
 ### 📂**Deliverables**
 
 - Working Web Application
@@ -234,14 +234,14 @@ REST API exposure for third-party integrations:
 - Architecture Diagram
 
 - Test Artifacts
-
+--------------------------
 ### **🛠️Tech Stack**
 
 - Backend: Java 17+, Spring Boot(REST API's), Spring Security, JWT Authentication Bcrypt, JPA Hibernate.
 - Database: Mysql
 - Frontend: Angular(Router, nterceptors Kama RXJS, Responsive UI)
 - Build Tools: Maven(Backend), Angular CLI(Frontend), Git(VErsion Control)
-
+-------------------
 ### 📌**Standard Functional Scope**
 
 - Authentication & Authorization
