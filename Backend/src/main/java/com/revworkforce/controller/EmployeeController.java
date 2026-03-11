@@ -62,4 +62,21 @@ public class EmployeeController {
                 ))
                 .toList();
     }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("/assign-user/{userId}")
+    public Employee createEmployeeForUser(
+            @PathVariable Long userId,
+            @RequestBody com.revworkforce.dto.CreateEmployeeRequest request) {
+
+        return employeeService.createEmployeeForUser(userId, request);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/{employeeId}/assign-manager/{managerId}")
+    public void assignManager(@PathVariable Long employeeId,
+                              @PathVariable Long managerId) {
+
+        employeeService.assignManager(employeeId, managerId);
+    }
 }

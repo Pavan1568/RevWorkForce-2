@@ -1,7 +1,7 @@
 package com.revworkforce.controller;
 
+import com.revworkforce.dto.CreateUserRequest;
 import com.revworkforce.entity.User;
-import com.revworkforce.repository.UserRepository;
 import com.revworkforce.service.UserManagementService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -14,21 +14,30 @@ import java.util.List;
 public class UserManagementController {
 
     private final UserManagementService userManagementService;
-    private final UserRepository userRepository;
 
-    public UserManagementController(UserManagementService userManagementService,
-                                    UserRepository userRepository) {
+    public UserManagementController(UserManagementService userManagementService) {
         this.userManagementService = userManagementService;
-        this.userRepository = userRepository;
     }
 
+    // CREATE USER
+    @PostMapping
+    public User createUser(@RequestBody CreateUserRequest request) {
+
+        User user = request.getUser();
+        String roleName = request.getRoleName();
+
+        return userManagementService.createUser(user, roleName);
+    }
+
+    // GET ALL USERS
     @GetMapping
     public List<User> getAllUsers() {
         return userManagementService.getAllUsers();
     }
 
+    // COUNT USERS
     @GetMapping("/count")
     public long getUserCount() {
-        return userRepository.count();
+        return userManagementService.getAllUsers().size();
     }
 }
