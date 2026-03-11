@@ -179,8 +179,6 @@ RevWorkforce follows a monolithic full-stack architecture, including:
 
 - Application Architecture Diagram
 
-#### Testing Artifacts:
-------------------------------------
 🧠 **Real-World Problem Solved**
 
 Organizations often struggle with:
@@ -192,8 +190,6 @@ Organizations often struggle with:
 - Lack of structured HR reporting
 
 - Poor visibility into employee goal tracking
-
-RevWorkforce centralizes these processes into a unified digital system, improving operational efficiency, accountability, and transparency.
 ----------------
 ### 🎯**Technical Highlights**
 
