@@ -1,5 +1,5 @@
 # RevWorkforce – Human Resource Management System
-## **📌 Project Overview**
+## 📌 **Project Overview**
 
 RevWorkforce is a full-stack monolithic Human Resource Management (HRM) web application built to streamline employee lifecycle management, leave administration, and performance evaluation processes within an organization.
 
@@ -16,7 +16,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Controlled access to features based on user roles
 
-### **👤 Employee Module Dashboard**
+### 👤 **Employee Module Dashboard**
 
 - View leave balance summary
 
@@ -74,7 +74,7 @@ Add:
 
 - View company-wide employee information
 
-### **👨‍💼 Manager Module**
+### 👨‍💼 **Manager Module**
 
 - Managers inherit all Employee features plus:
 
@@ -112,7 +112,7 @@ Add:
 
 - Access team member profiles
 
-### **🛠 Admin Module**
+### 🛠 **Admin Module**
 #### Employee Management:
 
 - Add new employees with full HR details
@@ -159,7 +159,7 @@ HR dashboard with key metrics:
 
 - Leave utilization reports
 
-### **🏗 System Architecture:**
+### 🏗 **System Architecture:**
 
 RevWorkforce follows a monolithic full-stack architecture, including:
 
@@ -195,7 +195,7 @@ Organizations often struggle with:
 
 RevWorkforce centralizes these processes into a unified digital system, improving operational efficiency, accountability, and transparency.
 
-### **🎯Technical Highlights**
+### 🎯**Technical Highlights**
 
 - Role-Based Access Control
 
@@ -211,7 +211,7 @@ RevWorkforce centralizes these processes into a unified digital system, improvin
 
 Search & Filtering Optimization
 
-### **📈Future Enhancements:**
+### 📈**Future Enhancements:**
 
 - Email notification integration
 
@@ -223,7 +223,7 @@ REST API exposure for third-party integrations:
 
 - Microservices refactor for scalability
 
-### **📂Deliverables**
+### 📂**Deliverables**
 
 - Working Web Application
 
@@ -242,7 +242,7 @@ REST API exposure for third-party integrations:
 - Frontend: Angular(Router, nterceptors Kama RXJS, Responsive UI)
 - Build Tools: Maven(Backend), Angular CLI(Frontend), Git(VErsion Control)
 
-### **📌Standard Functional Scope**
+### 📌**Standard Functional Scope**
 
 - Authentication & Authorization
 
