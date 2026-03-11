@@ -15,9 +15,8 @@ The application is designed with scalability, clean architecture, and real-world
 - Secure credential-based authentication
 
 - Controlled access to features based on user roles
-
+----------------------------------------------------
 ### 👤 **Employee Module Dashboard**
--------------------------------------------------
 
 - View leave balance summary
 
