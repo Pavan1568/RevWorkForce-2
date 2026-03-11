@@ -1,5 +1,5 @@
-RevWorkforce – Human Resource Management System
-📌 Project Overview
+# RevWorkforce – Human Resource Management System
+## 📌 Project Overview
 
 RevWorkforce is a full-stack monolithic Human Resource Management (HRM) web application built to streamline employee lifecycle management, leave administration, and performance evaluation processes within an organization.
 
@@ -7,8 +7,8 @@ The system supports three hierarchical roles — Employee, Manager, and Admin �
 
 The application is designed with scalability, clean architecture, and real-world HR workflows in mind.
 
-🚀 Key Features
-🔐 Authentication & Security
+### 🚀 Key Features
+### 🔐 Authentication & Security
 
 - Role-based login system (Employee / Manager / Admin)
 
@@ -16,7 +16,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Controlled access to features based on user roles
 
-👤 Employee Module Dashboard
+### 👤 Employee Module Dashboard
 
 - View leave balance summary
 
@@ -24,7 +24,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - Access company announcements
 
- Profile Management
+####  Profile Management
 
 - View complete profile details
 
@@ -32,7 +32,7 @@ The application is designed with scalability, clean architecture, and real-world
 
 - View reporting manager details
 
-Leave Management
+#### Leave Management
 
 - View leave balance (Casual, Sick, Paid Leave)
 
@@ -46,7 +46,7 @@ Leave Management
 
 - Receive real-time in-app notifications on leave decisions
 
-Performance Management
+#### Performance Management
 
 - Create and submit performance review documents
 
@@ -68,13 +68,13 @@ Add:
 
 - Receive notification upon review feedback
 
-Employee Directory
+#### Employee Directory
 
 - Search employees by name or department
 
 - View company-wide employee information
 
-👨‍💼 Manager Module
+### 👨‍💼 Manager Module
 
 - Managers inherit all Employee features plus:
 
@@ -92,7 +92,7 @@ Employee Directory
 
 - Get notified when team members apply for leave
 
-Performance Review Management
+#### Performance Review Management
 
 - Review submitted employee performance documents
 
@@ -106,14 +106,14 @@ Performance Review Management
 
 - Notification system for review submissions
 
-Team Management
+#### Team Management
 
 - View team hierarchy structure
 
 - Access team member profiles
 
-🛠 Admin Module
-Employee Management:
+### 🛠 Admin Module
+#### Employee Management:
 
 - Add new employees with full HR details
 
@@ -125,7 +125,7 @@ Employee Management:
 
 - Search & filter employees (ID, name, department, designation)
 
-Leave Administration:
+#### Leave Administration:
  
 - Configure leave types
 
@@ -137,7 +137,7 @@ Leave Administration:
 
 - Generate leave reports (employee-wise / department-wise)
 
-System Configuration: 
+#### System Configuration: 
 
 - Manage departments
 
@@ -159,7 +159,7 @@ HR dashboard with key metrics:
 
 - Leave utilization reports
 
-🏗 System Architecture:
+### 🏗 System Architecture:
 
 RevWorkforce follows a monolithic full-stack architecture, including:
 
@@ -173,13 +173,13 @@ RevWorkforce follows a monolithic full-stack architecture, including:
 
 - In-App Notification System
 
-Project documentation includes:
+#### Project documentation includes:
 
 - ERD (Entity Relationship Diagram)
 
 - Application Architecture Diagram
 
-Testing Artifacts:
+#### Testing Artifacts:
 
 🧠 Real-World Problem Solved
 
@@ -195,7 +195,7 @@ Organizations often struggle with:
 
 RevWorkforce centralizes these processes into a unified digital system, improving operational efficiency, accountability, and transparency.
 
-🎯 Technical Highlights
+### 🎯 Technical Highlights
 
 - Role-Based Access Control
 
@@ -211,7 +211,7 @@ RevWorkforce centralizes these processes into a unified digital system, improvin
 
 Search & Filtering Optimization
 
-📈 Future Enhancements:
+### 📈 Future Enhancements:
 
 - Email notification integration
 
@@ -223,7 +223,7 @@ REST API exposure for third-party integrations:
 
 - Microservices refactor for scalability
 
-📂 Deliverables
+### 📂Deliverables
 
 - Working Web Application
 
@@ -235,14 +235,14 @@ REST API exposure for third-party integrations:
 
 - Test Artifacts
 
-🛠️Tech Stack
+### 🛠️Tech Stack
 
 - Backend: Java 17+, Spring Boot(REST API's), Spring Security, JWT Authentication Bcrypt, JPA Hibernate.
 - Database: Mysql
 - Frontend: Angular(Router, nterceptors Kama RXJS, Responsive UI)
 - Build Tools: Maven(Backend), Angular CLI(Frontend), Git(VErsion Control)
 
-📌Standard Functional Scope
+### 📌Standard Functional Scope
 
 - Authentication & Authorization
 
