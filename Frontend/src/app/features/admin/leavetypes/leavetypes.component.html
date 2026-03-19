@@ -8,7 +8,7 @@
         <tr>
           <th scope="col">ID</th>
           <th scope="col">Name</th>
-          <th scope="col">Description</th>
+          <th scope="col">leaves</th>
           <th scope="col" class="text-center">Actions</th>
         </tr>
       </thead>
@@ -16,7 +16,7 @@
         <tr *ngFor="let lt of leaveTypes">
           <td>{{ lt.id }}</td>
           <td>{{ lt.name }}</td>
-          <td>{{ lt.description }}</td>
+          <td>{{ lt.totalDays }}</td>
           <td class="text-center">
             <button
               type="button"
@@ -56,15 +56,16 @@
             />
           </div>
           <div class="col-md-8">
-            <label for="ltDesc" class="form-label">Description (optional)</label>
-            <input
-              type="text"
-              id="ltDesc"
-              name="description"
-              class="form-control"
-              [(ngModel)]="newLeaveType.description"
-            />
-          </div>
+  <label for="ltDays" class="form-label">Total Days</label>
+  <input
+    type="number"
+    id="ltDays"
+    name="totalDays"
+    class="form-control"
+    required
+    [(ngModel)]="newLeaveType.totalDays"
+  />
+</div>
         </div>
 
         <div class="mt-3">

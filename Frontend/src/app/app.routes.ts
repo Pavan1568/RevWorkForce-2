@@ -130,13 +130,13 @@ export const routes: Routes = [
       },
 
       { path: 'apply-leave', loadComponent: () =>
-          import('./features/employee/leaves/leaves.component')
-            .then(m => m.LeavesComponent)
+          import('./features/employee/apply-leave/apply-leave.component')
+            .then(m => m.ApplyLeaveComponent)
       },
 
       { path: 'leaves', loadComponent: () =>
-          import('./features/employee/leaves/leaves.component')
-            .then(m => m.LeavesComponent)
+          import('./features/employee/my-leaves/my-leaves.component')
+            .then(m => m.MyLeavesComponent)
       },
 
       { path: 'leave-balance', loadComponent: () =>

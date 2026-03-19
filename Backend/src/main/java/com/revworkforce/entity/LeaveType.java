@@ -1,6 +1,8 @@
 package com.revworkforce.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 
 @Entity
 @Table(name = "leave_types")
@@ -15,6 +17,8 @@ public class LeaveType extends BaseEntity {
 
     private String description;
 
+
+    @NotNull
     private Integer totalDays;
 
     // getters & setters

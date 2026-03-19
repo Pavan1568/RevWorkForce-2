@@ -100,12 +100,6 @@ public class LeaveServiceImpl implements LeaveService {
         leave.setStatus(LeaveStatus.APPROVED);
         leave.setManagerComments(managerComment);
 
-        Notification notification = new Notification();
-        notification.setUser(leave.getEmployee().getUser());
-        notification.setMessage("Your leave request has been APPROVED.");
-        notification.isReadStatus();
-
-        notificationRepository.save(notification);
 
         long days = ChronoUnit.DAYS.between(
                 leave.getStartDate(),
@@ -140,12 +134,12 @@ public class LeaveServiceImpl implements LeaveService {
         leave.setStatus(LeaveStatus.REJECTED);
         leave.setManagerComments(managerComment);
 
-        Notification notification = new Notification();
-        notification.setUser(leave.getEmployee().getUser());
-        notification.setMessage("Your leave request has been REJECTED.");
-        notification.isReadStatus();
-
-        notificationRepository.save(notification);
+//        Notification notification = new Notification();
+//        notification.setUser(leave.getEmployee().getUser());
+//        notification.setMessage("Your leave request has been REJECTED.");
+//        notification.isReadStatus();
+//
+//        notificationRepository.save(notification);
 
         return leaveApplicationRepository.save(leave);
     }

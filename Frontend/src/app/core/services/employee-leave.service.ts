@@ -15,8 +15,12 @@ export class EmployeeLeaveService {
   }
 
   applyLeave(data: any) {
-    return this.http.post(`${this.baseUrl}/apply`, data);
-  }
+  return this.http.post(
+    `${this.baseUrl}/apply`,
+    data,
+    { responseType: 'text' }   //  important
+  );
+}
 
   getTeamLeaves(managerId: number) {
   return this.http.get<any[]>(
@@ -26,7 +30,7 @@ export class EmployeeLeaveService {
 
 getLeaveBalance(employeeId: number) {
   return this.http.get<any[]>(
-    `http://localhost:8080/api/leaves/manager/employee/${employeeId}/balance`
+    `${this.baseUrl}/employee/${employeeId}/balance`
   );
 }
 }

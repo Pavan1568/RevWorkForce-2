@@ -129,16 +129,19 @@
 
           <div class="col-md-6">
             <label for="designationId" class="form-label">Designation ID</label>
-            <input
-              type="number"
-              id="designationId"
-              name="designationId"
-              class="form-control"
-              required
-              [(ngModel)]="newEmployee.designationId"
-            />
+            <select
+            id="designationId"
+            name="designationId"
+            class="form-select"
+            required
+            [(ngModel)]="newEmployee.designationId"
+            >
+            <option [ngValue]="null">-- Select Designation --</option>
+            <option *ngFor="let d of designations" [ngValue]="d.id">
+              {{ d.name }}
+            </option>
+            </select>
             <div class="form-text">
-              No designation API found in backend; enter the designation ID directly.
             </div>
           </div>
         </div>

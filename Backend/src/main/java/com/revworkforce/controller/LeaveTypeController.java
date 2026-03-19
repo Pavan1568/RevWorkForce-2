@@ -2,6 +2,7 @@ package com.revworkforce.controller;
 
 import com.revworkforce.entity.LeaveType;
 import com.revworkforce.service.LeaveTypeService;
+import jakarta.validation.Valid;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class LeaveTypeController {
     // 🔐 Admin-only operations
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public LeaveType createLeaveType(@RequestBody LeaveType leaveType) {
+    public LeaveType createLeaveType(@Valid @RequestBody LeaveType leaveType) {
         return leaveTypeService.createLeaveType(leaveType);
     }
 

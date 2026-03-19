@@ -1,8 +1,10 @@
 package com.revworkforce.service.impl;
+import org.springframework.transaction.annotation.Transactional;
 import com.revworkforce.entity.Employee;
 import com.revworkforce.entity.LeaveBalance;
 import com.revworkforce.entity.LeaveType;
 import com.revworkforce.repository.EmployeeRepository;
+import com.revworkforce.repository.LeaveApplicationRepository;
 import com.revworkforce.repository.LeaveBalanceRepository;
 import com.revworkforce.repository.LeaveTypeRepository;
 import com.revworkforce.service.LeaveTypeService;
@@ -16,14 +18,17 @@ public class LeaveTypeServiceImpl implements LeaveTypeService {
     private final LeaveTypeRepository leaveTypeRepository;
     private final EmployeeRepository employeeRepository;
     private final LeaveBalanceRepository leaveBalanceRepository;
+    private final LeaveApplicationRepository leaveApplicationRepository;
 
     public LeaveTypeServiceImpl(LeaveTypeRepository leaveTypeRepository,
                                 EmployeeRepository employeeRepository,
-                                LeaveBalanceRepository leaveBalanceRepository) {
+                                LeaveBalanceRepository leaveBalanceRepository,
+                                LeaveApplicationRepository leaveApplicationRepository) {
 
         this.leaveTypeRepository = leaveTypeRepository;
         this.employeeRepository = employeeRepository;
         this.leaveBalanceRepository = leaveBalanceRepository;
+        this.leaveApplicationRepository = leaveApplicationRepository;
     }
 
     @Override
@@ -69,7 +74,15 @@ public class LeaveTypeServiceImpl implements LeaveTypeService {
     }
 
     @Override
+    @Transactional
     public void deleteLeaveType(Long id) {
+
+        leaveApplicationRepository.deleteByLeaveType_Id(id);
+
+        leaveBalanceRepository.deleteByLeaveType_Id(id);
+
         leaveTypeRepository.deleteById(id);
     }
+
+
 }

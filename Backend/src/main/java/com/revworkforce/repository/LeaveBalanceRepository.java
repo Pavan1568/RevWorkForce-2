@@ -14,4 +14,5 @@ public interface LeaveBalanceRepository
     );
 
     List<LeaveBalance> findByEmployeeId(Long employeeId);
+    void deleteByLeaveType_Id(Long leaveTypeId);
 }

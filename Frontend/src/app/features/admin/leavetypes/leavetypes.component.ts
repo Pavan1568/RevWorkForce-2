@@ -15,7 +15,8 @@ export class LeavetypesComponent implements OnInit {
 
   newLeaveType: any = {
     name: '',
-    description: ''
+    description: '',
+    totalDays: null
   };
 
   isSubmitting = false;
@@ -46,14 +47,14 @@ export class LeavetypesComponent implements OnInit {
 
     this.isSubmitting = true;
 
-    this.leaveTypeService.create(this.newLeaveType).subscribe({
+    this.leaveTypeService.createLeaveType(this.newLeaveType).subscribe({
       next: () => {
         alert('Leave type created successfully');
         this.newLeaveType = { name: '', description: '' };
         this.loadLeaveTypes();
         this.isSubmitting = false;
       },
-      error: (err) => {
+      error: (err:any) => {
         console.error('Failed to create leave type', err);
         alert('Failed to create leave type');
         this.isSubmitting = false;

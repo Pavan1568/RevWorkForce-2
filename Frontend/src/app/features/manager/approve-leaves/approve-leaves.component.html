@@ -1,53 +1,99 @@
 <div class="container mt-3">
-  <h2 class="mb-3">Approve Leaves</h2>
 
+  <h2 class="mb-3">Approve Leave Requests</h2>
+
+  <!-- Manager ID -->
   <div class="card mb-3">
     <div class="card-body">
-      <form class="row g-3 align-items-end" (ngSubmit)="loadLeaves()" #f="ngForm">
+      <form (ngSubmit)="loadLeaves()" #f="ngForm" class="row g-3 align-items-end">
+
         <div class="col-md-4">
-          <label for="managerId" class="form-label">Manager ID</label>
-          <input type="number" id="managerId" name="managerId" class="form-control" required [(ngModel)]="managerId" />
+          <label class="form-label">Manager ID</label>
+          <input
+            type="number"
+            class="form-control"
+            required
+            name="managerId"
+            [(ngModel)]="managerId"
+          >
         </div>
+
         <div class="col-md-3">
-          <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Load Team Leaves</button>
+          <button class="btn btn-primary" type="submit" [disabled]="f.invalid">
+            Load Leaves
+          </button>
         </div>
+
       </form>
     </div>
   </div>
 
+  <!-- Leaves Table -->
   <div class="table-responsive">
-    <table class="table table-sm table-striped table-bordered">
+    <table class="table table-striped table-bordered table-sm">
+
       <thead class="table-light">
         <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Employee ID</th>
-          <th scope="col">Start</th>
-          <th scope="col">End</th>
-          <th scope="col">Reason</th>
-          <th scope="col">Status</th>
-          <th scope="col" class="text-center">Actions</th>
+          <th>ID</th>
+          <th>Employee</th>
+          <th>Leave Type</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Status</th>
+          <th>Action</th>
         </tr>
       </thead>
+
       <tbody>
+
         <tr *ngFor="let l of leaves">
+
           <td>{{ l.id }}</td>
           <td>{{ l.employeeId }}</td>
-          <td>{{ l.startDate | date: 'yyyy-MM-dd' }}</td>
-          <td>{{ l.endDate | date: 'yyyy-MM-dd' }}</td>
-          <td>{{ l.reason }}</td>
+          <td>{{ l.leaveTypeId }}</td>
+          <td>{{ l.startDate | date:'yyyy-MM-dd' }}</td>
+          <td>{{ l.endDate | date:'yyyy-MM-dd' }}</td>
           <td>{{ l.status }}</td>
-          <td class="text-center">
-            <ng-container *ngIf="l.status === 'PENDING'">
-              <button type="button" class="btn btn-sm btn-success me-1" [disabled]="processingId !== null" (click)="approve(l)">Approve</button>
-              <button type="button" class="btn btn-sm btn-danger" [disabled]="processingId !== null" (click)="reject(l)">Reject</button>
-            </ng-container>
-            <span *ngIf="l.status !== 'PENDING'">—</span>
+
+          <td>
+
+  <span *ngIf="l.status === 'APPROVED'" class="badge bg-success">
+    Approved
+  </span>
+
+  <span *ngIf="l.status === 'REJECTED'" class="badge bg-danger">
+    Rejected
+  </span>
+
+  <div *ngIf="l.status === 'PENDING'">
+
+    <button
+      class="btn btn-success btn-sm me-2"
+      (click)="approveLeave(l.id)">
+      Approve
+    </button>
+
+    <button
+      class="btn btn-danger btn-sm"
+      (click)="rejectLeave(l.id)">
+      Reject
+    </button>
+
+  </div>
+
+</td>
+
+        </tr>
+
+        <tr *ngIf="leaves.length === 0">
+          <td colspan="7" class="text-center text-muted">
+            No leave requests found
           </td>
         </tr>
-        <tr *ngIf="leaves.length === 0">
-          <td colspan="7" class="text-center text-muted">No leaves. Enter Manager ID and click Load Team Leaves.</td>
-        </tr>
+
       </tbody>
+
     </table>
   </div>
+
 </div>

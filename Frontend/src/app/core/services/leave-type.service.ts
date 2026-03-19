@@ -14,9 +14,9 @@ export class LeaveTypeService {
     return this.http.get<any[]>(this.baseUrl);
   }
 
-  create(data: any) {
-    return this.http.post(this.baseUrl, data);
-  }
+  createLeaveType(data: any) {
+  return this.http.post<any>(this.baseUrl, data);
+}
 
   delete(id: number) {
     return this.http.delete(`${this.baseUrl}/${id}`);

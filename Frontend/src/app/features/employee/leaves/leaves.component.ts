@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs';
+
 import { EmployeeLeaveService } from '../../../core/services/employee-leave.service';
 import { LeaveTypeService } from '../../../core/services/leave-type.service';
 
@@ -13,8 +16,11 @@ import { LeaveTypeService } from '../../../core/services/leave-type.service';
 export class LeavesComponent implements OnInit {
 
   employeeId: number | null = null;
+
   leaveTypes: any[] = [];
   myLeaves: any[] = [];
+
+  showApplyForm = false;
 
   newLeave: any = {
     leaveTypeId: null,
@@ -27,56 +33,63 @@ export class LeavesComponent implements OnInit {
 
   constructor(
     private employeeLeaveService: EmployeeLeaveService,
-    private leaveTypeService: LeaveTypeService
+    private leaveTypeService: LeaveTypeService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-     this.employeeId = Number(localStorage.getItem('employeeId'));
-     this.loadLeaveTypes();
-     this.loadMyLeaves();
+
+    const id = localStorage.getItem('employeeId');
+    if (id) {
+      this.employeeId = Number(id);
+    }
+
+    this.loadLeaveTypes();
+    this.detectRoute();
+
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.detectRoute();
+      });
+  }
+
+  detectRoute() {
+
+    const url = this.router.url;
+
+    if (url.includes('apply-leave')) {
+      this.showApplyForm = true;
+    } else {
+      this.showApplyForm = false;
+      this.loadMyLeaves();
+    }
   }
 
   loadLeaveTypes() {
     this.leaveTypeService.getAll().subscribe({
       next: (data) => {
         this.leaveTypes = data;
-      },
-      error: (err) => {
-        console.error('Failed to load leave types', err);
-        alert('Failed to load leave types');
       }
     });
   }
 
   loadMyLeaves() {
-    if (!this.employeeId) {
-      alert('Please enter your Employee ID');
-      return;
-    }
+
+    if (!this.employeeId) return;
 
     this.employeeLeaveService.getMyLeaves(this.employeeId).subscribe({
       next: (data) => {
         this.myLeaves = data;
-      },
-      error: (err) => {
-        console.error('Failed to load leaves', err);
-        alert('Failed to load leaves');
       }
     });
   }
 
   applyLeave() {
-    if (!this.employeeId) {
-      alert('Please enter your Employee ID');
-      return;
-    }
 
-    if (!this.newLeave.leaveTypeId || !this.newLeave.startDate || !this.newLeave.endDate || !this.newLeave.reason) {
-      alert('Leave type, date range and reason are required');
-      return;
-    }
+    if (!this.employeeId) return;
 
-    const requestPayload = {
+    const payload = {
       employeeId: this.employeeId,
       leaveTypeId: this.newLeave.leaveTypeId,
       startDate: this.newLeave.startDate,
@@ -86,23 +99,26 @@ export class LeavesComponent implements OnInit {
 
     this.isSubmitting = true;
 
-    this.employeeLeaveService.applyLeave(requestPayload).subscribe({
+    this.employeeLeaveService.applyLeave(payload).subscribe({
       next: () => {
-        alert('Leave applied successfully');
+
+        alert('Leave Applied Successfully');
+
         this.newLeave = {
           leaveTypeId: null,
           startDate: '',
           endDate: '',
           reason: ''
         };
-        this.loadMyLeaves();
+
         this.isSubmitting = false;
+
+        this.loadMyLeaves();
       },
-      error: (err) => {
-        console.error('Failed to apply leave', err);
-        alert('Failed to apply leave');
+      error: () => {
         this.isSubmitting = false;
       }
     });
   }
+
 }

@@ -6,9 +6,9 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <div class="container mt-3">
-      <h2 class="mb-3">Goals Overview</h2>
-      <p class="text-muted">Goals are set by employees. Use Team Members and Performance Reviews to track progress.</p>
+    <div class="alert alert-info mt-3">
+  Goals are defined by employees.  
+  Managers can monitor progress through Performance Reviews and Team Members modules.
     </div>
   `
 })

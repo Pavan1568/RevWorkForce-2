@@ -156,6 +156,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
+        if (!user.isActive()) {
+            throw new RuntimeException("Cannot create employee for inactive user");
+        }
+
         Department department = departmentRepository.findById(request.getDepartmentId())
                 .orElseThrow(() -> new ResourceNotFoundException("Department not found"));
 

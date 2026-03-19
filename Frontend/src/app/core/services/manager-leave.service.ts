@@ -14,13 +14,30 @@ export class ManagerLeaveService {
     return this.http.get<any[]>(`${this.baseUrl}/manager/${managerId}`);
   }
 
-  approveLeave(leaveId: number, comment: string) {
-    return this.http.put(`${this.baseUrl}/${leaveId}/approve?comment=${encodeURIComponent(comment)}`, {});
-  }
+  approveLeave(id: number) {
+  return this.http.put(
+    `http://localhost:8080/api/leaves/${id}/approve?comment=Approved`,
+    {}
+  );
+}
 
-  rejectLeave(leaveId: number, comment: string) {
-    return this.http.put(`${this.baseUrl}/${leaveId}/reject?comment=${encodeURIComponent(comment)}`, {});
-  }
+rejectLeave(id: number) {
+  return this.http.put(
+    `http://localhost:8080/api/leaves/${id}/reject?comment=Rejected`,
+    {}
+  );
+}
+
+// rejectLeave(id: number) {
+//   return this.http.put(`${this.baseUrl}/${id}/reject`, {});
+// }
+
+
+getTeamLeaveCalendar(managerId: number) {
+  return this.http.get<any[]>(
+    `${this.baseUrl}/manager/${managerId}/calendar`
+  );
+}
 
   getEmployeeLeaveBalance(employeeId: number) {
     return this.http.get<any[]>(`${this.baseUrl}/manager/employee/${employeeId}/balance`);

@@ -32,7 +32,7 @@
     <!-- Roles -->
     <td>
       <span *ngFor="let role of user.roles; let last = last">
-        {{ role }}<span *ngIf="!last">, </span>
+        {{ role.name }}<span *ngIf="!last">, </span>
       </span>
     </td>
 

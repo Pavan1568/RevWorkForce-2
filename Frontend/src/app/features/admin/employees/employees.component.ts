@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { EmployeeService } from '../../../core/services/employee.service';
 import { UserService } from '../../../core/services/user.service';
 import { DepartmentService } from '../../../core/services/department.service';
+import { DesignationService } from '../../../core/services/designation.service';
 
 @Component({
   selector: 'app-employees',
@@ -16,6 +17,7 @@ export class EmployeesComponent implements OnInit {
   employees: any[] = [];
   users: any[] = [];
   departments: any[] = [];
+  designations: any[] = [];
 
   selectedUserId: number | null = null;
 
@@ -35,13 +37,15 @@ export class EmployeesComponent implements OnInit {
   constructor(
     private employeeService: EmployeeService,
     private userService: UserService,
-    private departmentService: DepartmentService
+    private departmentService: DepartmentService,
+     private designationService: DesignationService
   ) {}
 
   ngOnInit(): void {
     this.loadEmployees();
     this.loadUsers();
     this.loadDepartments();
+    this.loadDesignations();
   }
 
   loadEmployees() {
@@ -79,6 +83,18 @@ export class EmployeesComponent implements OnInit {
       }
     });
   }
+
+  loadDesignations() {
+  this.designationService.getAll().subscribe({
+    next: (data) => {
+      this.designations = data;
+    },
+    error: (err) => {
+      console.error('Failed to load designations', err);
+      alert('Failed to load designations');
+    }
+  });
+}
 
   createEmployeeForUser() {
     if (!this.selectedUserId) {

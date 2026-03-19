@@ -78,16 +78,17 @@ export class AdminUsersComponent implements OnInit {
 
   // ================= ACTIVATE / DEACTIVATE =================
   toggleStatus(user: any) {
-    const newStatus = !user.active;
 
-    this.userService.updateUserStatus(user.id, newStatus).subscribe({
+  const newStatus = !user.active;
+
+  this.userService.updateUserStatus(user.id, newStatus)
+    .subscribe({
       next: () => {
-        user.active = newStatus; // update UI instantly
+        user.active = newStatus;
       },
-      error: (err: any) => {
-        console.error('Failed to update status', err);
-        alert('Failed to update status');
+      error: () => {
+        alert("Failed to update status");
       }
     });
-  }
+}
 }

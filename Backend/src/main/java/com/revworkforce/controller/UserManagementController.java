@@ -40,4 +40,12 @@ public class UserManagementController {
     public long getUserCount() {
         return userManagementService.getAllUsers().size();
     }
+
+    //USER STATUS
+    @PutMapping("/{id}/status")
+    public User updateUserStatus(@PathVariable Long id,
+                                 @RequestParam boolean active) {
+
+        return userManagementService.updateUserStatus(id, active);
+    }
 }

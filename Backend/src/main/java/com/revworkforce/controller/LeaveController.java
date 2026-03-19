@@ -80,11 +80,10 @@ public class LeaveController {
     // ==============================
     @PreAuthorize("hasAnyRole('MANAGER','ADMIN')")
     @PutMapping("/{id}/reject")
-    public LeaveResponseDTO rejectLeave(
-            @PathVariable Long id,
-            @RequestParam String comment) {
+    public LeaveResponseDTO rejectLeave(@PathVariable Long id) {
 
-        LeaveApplication leaveApplication = leaveService.rejectLeave(id, comment);
+        LeaveApplication leaveApplication = leaveService.rejectLeave(id, "Rejected");
+
         return mapToResponseDTO(leaveApplication);
     }
 
@@ -99,6 +98,13 @@ public class LeaveController {
                 .stream()
                 .map(this::mapToResponseDTO)
                 .collect(Collectors.toList());
+    }
+
+    // View Leave Balance
+    @GetMapping("/employee/{employeeId}/balance")
+    @PreAuthorize("hasAnyRole('EMPLOYEE','ADMIN')")
+    public List<LeaveBalance> getMyLeaveBalance(@PathVariable Long employeeId) {
+        return leaveService.getEmployeeLeaveBalance(employeeId);
     }
 
     // ==============================
